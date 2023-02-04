@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+            crossorigin="anonymous">
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+            integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+            crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <!-- Link Swiper's CSS -->
+        <link rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"
+            />
+        <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+        <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
+        <link rel="stylesheet" href="css/themify-icons.css" type="text/css">
+        <link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
+        <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
+        <link rel="stylesheet" href="css/nice-select.css" type="text/css">
+        <link rel="stylesheet" href="css/jquery-ui.min.css" type="text/css">
+        <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
+        <link rel="stylesheet" href="css/style.css" type="text/css">
+        <link rel="stylesheet" href="css/responsive-style.css" type="text/css">
+        <link rel="stylesheet" href="css/nav.css" type="text/css">
+    </head>
+
+    <body>
+      <form action="" method="post">
+        <div class="container-fluid collapse search-collapse"
+            id="collapseExample">
+            <div class="input-group p-2">
+                <input class="form-control rounded-0" type="search"
+                    placeholder="Search for products">
+                <button type="submit" style="border: none; background:
+                    none;"><i
+                        class="fa-solid fa-magnifying-glass"></i></button>
+            </div>
+        </div>
+    </form>
+    <header class="header-wrapper">
+        <div class="container-fluid topbar">
+            <div class="topbar-area container-xxl">
+                <div class="d-flex justify-content-between">
+                    <a href="mailto:sales@restopedic.co.uk"
+                        class="topbar-link d-none d-sm-block"><i
+                            class="fa-regular fa-envelope"></i>sales@restopedic.co.uk</a>
+                    <a href="tel:07306326948" class="topbar-link"><i
+                            class="fa-solid fa-phone"></i>07306 326948</a>
+                </div>
+            </div>
+        </div>
+        <nav class="navbar navbar-expand-md">
+            <div class="container-fluid container-xxl">
+                <a class="navbar-brand" href="#">
+                    <img src="img/restopedic.png" class="img-fluid" alt="">
+                </a>
+                <button class="navbar-toggler" type="button"
+                    data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <!-- <span class="navbar-toggler-icon"></span> -->
+                    <i class="fa-solid fa-stream navbar-toggler-icon"></i>
+                </button>
+                <ul class="nav-right d-md-none">
+                    <li class="cart-icon">
+                        <a href="#">
+                            <i class="fa-solid fa-lock"></i>
+                        </a>
+                        <div class="cart-hover">
+                            <div class="select-items">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td class="si-pic"><img
+                                                    src="img/london_chair.png"
+                                                    alt=""></td>
+                                            <td class="si-text">
+                                                <div
+                                                    class="product-selected">
+                                                    <p>$60.00 x 1</p>
+                                                    <h6>Product Name</h6>
+                                                </div>
+                                            </td>
+                                            <td class="si-close">
+                                                <i class="fa-solid fa-xmark"></i>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="si-pic"><img
+                                                    src="img/london_chair.png"
+                                                    alt=""></td>
+                                            <td class="si-text">
+                                                <div
+                                                    class="product-selected">
+                                                    <p>$60.00 x 1</p>
+                                                    <h6>Product Name</h6>
+                                                </div>
+                                            </td>
+                                            <td class="si-close">
+                                                <i class="fa-solid fa-xmark"></i>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="select-total">
+                                <span>total:</span>
+                                <h5>$120.00</h5>
+                            </div>
+                            <div class="select-button">
+                                <a href="#" class="primary-btn modal-btn">CHECK
+                                    OUT</a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <div class="collapse navbar-collapse justify-content-center"
+                    id="navbarNav">
+                    <ul class="navbar-nav me-5">
+                        <li class="nav-item d-none d-lg-block"><a
+                                href="#collapseExample"
+                                data-bs-toggle="collapse"
+                                role="button" aria-expanded="false"
+                                aria-controls="collapseExample"
+                                class="nav-link"><i
+                                    class="fa-solid fa-magnifying-glass"></i></a></li>
+                        <li class="nav-item"><a href="#" class="nav-link">About
+                                Us</a></li>
+                                <li class="nav-item dropdown"><a href="#"
+                                    class="nav-link dropdown-toggle"
+                                    data-bs-toggle="dropdown">Showrooms</a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#" class="dropdown-item border-bottom">Yorkshire Showroom</a></li>
+                                    <li><a href="#" class="dropdown-item">London Showroom</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown"><a href="#"
+                                class="nav-link dropdown-toggle"
+                                data-bs-toggle="dropdown">Help</a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#" class="dropdown-item border-bottom">Worldwide Delivery</a></li>
+                                <li><a href="#" class="dropdown-item border-bottom">FAQs</a></li>
+                                <li><a href="#" class="dropdown-item border-bottom">Finance Options</a></li>
+                                <li><a href="#" class="dropdown-item border-bottom">Bespoke Furniture Making</a></li>
+                                <li><a href="#" class="dropdown-item border-bottom">Guarantee</a></li>
+                                <li><a href="#" class="dropdown-item border-bottom">Guardsman Protection Plan</a></li>
+                                <li><a href="#" class="dropdown-item border-bottom">Leather Buying Guide</a></li>
+                                <li><a href="#" class="dropdown-item">Sofa Measuring Guide</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item"><a href="#" class="nav-link">News</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link">Contact</a></li>
+                    </ul>
+                </div>
+                <ul class="nav-right d-none d-md-block">
+                    <li class="cart-price">Basket</li>
+                    <li class="cart-icon">
+                        <a href="#">
+                            <i class="fa-solid fa-lock"></i>
+                        </a>
+                        <div class="cart-hover">
+                            <div class="select-items">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td class="si-pic"><img
+                                                    src="img/london_chair.png"
+                                                    alt=""></td>
+                                            <td class="si-text">
+                                                <div
+                                                    class="product-selected">
+                                                    <p>$60.00 x 1</p>
+                                                    <h6>Product Name</h6>
+                                                </div>
+                                            </td>
+                                            <td class="si-close">
+                                                <i class="fa-solid fa-xmark"></i>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="si-pic"><img
+                                                    src="img/london_chair.png"
+                                                    alt=""></td>
+                                            <td class="si-text">
+                                                <div
+                                                    class="product-selected">
+                                                    <p>$60.00 x 1</p>
+                                                    <h6>Product Name</h6>
+                                                </div>
+                                            </td>
+                                            <td class="si-close">
+                                                <i class="fa-solid fa-xmark"></i>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="select-total">
+                                <span>total:</span>
+                                <h5>$120.00</h5>
+                            </div>
+                            <div class="select-button">
+                                <a href="#" class="primary-btn modal-btn">CHECK
+                                    OUT</a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <div class="container-xxl my-0">
+            <hr>
+        </div>
+        <nav class="navbar navbar-expand-md">
+            <div class="container-fluid container-xxl">
+                <div class="collapse navbar-collapse ps-2" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item"><a href="#" class="nav-link">Bedstore
+                                Sofas</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link">Corner
+                                Sofas</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link">Sofas</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link">Chairs</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link">Beds</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link">Sofa
+                                Beds</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link">Stools
+                                & Chaise Lounges</a></li>
+                        <li class="nav-item dropdown"><a href="#"
+                                class="nav-link dropdown-toggle"
+                                data-bs-toggle="dropdown">Popular</a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#" class="dropdown-item border-bottom">Leather Sofas</a></li>
+                                <li><a href="#" class="dropdown-item border-bottom">Tan Leather Sofas</a></li>
+                                <li><a href="#" class="dropdown-item border-bottom">Grey Leather Sofas</a></li>
+                                <li><a href="#" class="dropdown-item border-bottom">Velvet Bedstore Sofas</a></li>
+                                <li><a href="#" class="dropdown-item border-bottom">Brown Leather Sofas</a></li>
+                                <li><a href="#" class="dropdown-item border-bottom">Pink Velvet Sofas</a></li>
+                                <li><a href="#" class="dropdown-item border-bottom">Blue Velvet Sofas</a></li>
+                                <li><a href="#" class="dropdown-item border-bottom">Green Velvet Sofas</a></li>
+                                <li><a href="#" class="dropdown-item">Grey Velvet Sofas</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item"><a href="#" class="nav-link">Free
+                                Brochure & Samples</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="container-xxl my-0">
+            <hr>
+        </div>
+        <nav class="navbar navbar-expand-md">
+            <div class="container-fluid container-xxl">
+                <div class="collapse navbar-collapse ps-2" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item"><a href="#" class="nav-link">Beds
+                                Demo</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link">Beds
+                                Demo</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link">Beds
+                                Demo</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link">Beds
+                                Demo</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link">Beds
+                                Demo</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link">Beds
+                                Demo</a></li>
+                        <li class="nav-item dropdown"><a href="#"
+                                class="nav-link dropdown-toggle"
+                                data-bs-toggle="dropdown">Dropdown</a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#" class="dropdown-item border-bottom">Dropdown Link</a></li>
+                                <li><a href="#" class="dropdown-item border-bottom">Dropdown Link</a></li>
+                                <li><a href="#" class="dropdown-item border-bottom">Dropdown Link</a></li>
+                                <li><a href="#" class="dropdown-item border-bottom">Dropdown Link</a></li>
+                                <li><a href="#" class="dropdown-item border-bottom">Dropdown Link</a></li>
+                                <li><a href="#" class="dropdown-item border-bottom">Dropdown Link</a></li>
+                                <li><a href="#" class="dropdown-item border-bottom">Dropdown Link</a></li>
+                                <li><a href="#" class="dropdown-item border-bottom">Dropdown Link</a></li>
+                                <li><a href="#" class="dropdown-item">Dropdown Link</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item"><a href="#" class="nav-link">Beds
+                                Demo</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+        <div class="container-xxl">
+            <div id="carouselExampleControls" class="carousel slide
+                carousel-fade" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <a href="bedstore-sofas.php"><img src="img/7.jpg"
+                                class="d-block w-100" alt="..."></a>
+                    </div>
+                    <div class="carousel-item">
+                        <a href="corner-sofas.php"><img src="img/6_2-1.jpg"
+                                class="d-block w-100" alt="..."></a>
+                    </div>
+                    <div class="carousel-item">
+                        <a href="stools&lounges.php"><img src="img/5_2.jpg"
+                                class="d-block w-100" alt="..."></a>
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button"
+                    data-bs-target="#carouselExampleControls"
+                    data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button"
+                    data-bs-target="#carouselExampleControls"
+                    data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+        <section class="banner-2">
+            <div class="container container-xxl">
+              <div class="benefit-items">
+                <div class="row">
+                  <div class="col-lg-4">
+                    <div class="single-benefit">
+                      <div class="sb-icon">
+                        <img src="img/card-img.png" alt="" />
+                      </div>
+                      <div class="sb-text">
+                        <p>pay just &euro;99 deposit</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-4">
+                    <div class="single-benefit">
+                      <div class="sb-icon">
+                        <img src="img/check-img.png" alt="" />
+                      </div>
+                      <div class="sb-text">
+                        <p>30 day money back guarantee</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-4">
+                    <div class="single-benefit">
+                      <div class="sb-icon">
+                        <img src="img/swatch-img.png" alt="" />
+                      </div>
+                      <div class="sb-text">
+                        <p>order free samples and brochure</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section class="col_3">
+            <div class="container-fluid container-xxl">
+              <h2 class="text-center">a distinctive range</h2>
+              <div class="row g-3">
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                  <a href="corner-sofas.php">
+                    <div class="card">
+                      <img src="img/products/3_14-min-1024x1024.png" class="card-img-top" alt="...">
+                      <div class="card-footer">
+                        <h5 class="card-title">bedstore corner sofas</h5>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                  <a href="bedstore-sofas.php">
+                    <div class="card">
+                      <img src="img/products/2_19-min-1024x1024.png" class="card-img-top" alt="...">
+                      <div class="card-footer">
+                        <h5 class="card-title">bedstore sofas</h5>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                  <a href="sofas.php">
+                    <div class="card">
+                      <img src="img/products/6_6-min-1-1024x1024.png" class="card-img-top" alt="...">
+                      <div class="card-footer">
+                        <h5 class="card-title">handmade sofas</h5>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                  <a href="chairs.php">
+                    <div class="card">
+                      <img src="img/products/1_17-min-1024x1024.png" class="card-img-top" alt="...">
+                      <div class="card-footer">
+                        <h5 class="card-title">bedstore chairs</h5>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                  <a href="sofa-beds.php">
+                    <div class="card">
+                      <img src="img/products/4_15-min-1024x1024.png" class="card-img-top" alt="...">
+                      <div class="card-footer">
+                        <h5 class="card-title">bedstore sofa bed</h5>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                  <a href="stools&lounges.php">
+                    <div class="card">
+                      <img src="img/products/5_11-min-1024x1024.png" class="card-img-top" alt="...">
+                      <div class="card-footer">
+                        <h5 class="card-title">foot stools & chaise longues</h5>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section class="section_column">
+            <div class="container-fluid container-xxl">
+              <div class="row">
+                <div class="col-lg-7">
+                  <h2>distinctive bedstores designed and handmade in great britian</h2>
+                  <p>What goes into the perfect handmade bedstore Sofas?</p>
+                  <p>Our vast supply network featuring only the finest materials and components from luxury leathers to
+                    high-quality deep-pile velvets.</p>
+                  <p>A talented team of experienced craftspeople, hand-making every single item.</p>
+                  <p>Our made-to-order service, ensuring that your piece is simply the best.</p>
+                  <p>When you order from Distinctive bedstores you know your dream sofa is in safe hands. Our strong sense
+                    of heritage and quality make us experts in bedstore manufacturing, using quality, traditional techniques
+                    in our UK-based workshop. Our upholsterers, carpenters, and finishers are all trained to the highest
+                    standards and have a passion and pride for what they do resulting in stunning, traditional bedstore
+                    Sofas, Chairs and footstools.</p>
+                  <p>Discover <a href="bedstore-sofas.php">our collection</a> today!</p>
+                </div>
+                <div class="col-lg-5">
+                  <img src="img/handmade-1.png" class="img-fluid" alt="">
+                </div>
+              </div>
+            </div>
+          </section>
+          <style>
+            .slide-container {
+              margin: 0 30px;
+              overflow: hidden;
+              padding-bottom: 30px;
+            }
+          
+            .card {
+              background-color: #fff;
+            }
+          
+            .card .image-box {
+              height: 100%;
+            }
+          
+            .card .image-box img {
+              max-width: 100%;
+              height: auto;
+              border-top: 6px solid #000;
+            }
+          
+            .product-details .name {
+              text-transform: uppercase;
+              font-family: 'Times New Roman', Times, serif;
+              font-weight: 500;
+              font-size: 23px;
+              padding-bottom: 20px;
+            }
+          
+            .product-details {
+              padding: 10px;
+            }
+          
+            .product-details .from {
+              color: #4d4d4d;
+            }
+          
+            .product-details .price {
+              color: #000;
+            }
+          
+            .product-details .name a {
+              color: #000;
+              text-decoration: none;
+            }
+          
+            .swiper-navBtn {
+              color: #fff;
+              width: 40px;
+              height: 40px;
+              background-color: #252525;
+              border-radius: 50%;
+            }
+          
+            .swiper-navBtn::before,
+            .swiper-navBtn::after {
+              font-size: 18px;
+          
+            }
+          </style>
+          <section class="product_slider">
+            <div class="container-fluid swiper container-xxl">
+              <div class="slide-container">
+                <div class="card-wrapper swiper-wrapper">
+                  <div class="card swiper-slide">
+                      <div class="image-box">
+                          <img
+                              src="img/categories/bedstore-sofas/bedstore-sofa-1.png"
+                              alt="">
+                      </div>
+                      <div class="product-details">
+                          <h4 class="name"><a href="product-details.php">Hampton
+                                  Bedstore Sofa</a></h4>
+                          <span class="from">From</span>
+                          <p class="price">&euro; 1,429.00</p>
+                      </div>
+                  </div>
+                  <div class="card swiper-slide">
+                      <div class="image-box">
+                          <img src="img/categories/sofas/sofa-4.jpg"
+                              alt="">
+                      </div>
+                      <div class="product-details">
+                          <h4 class="name"><a href="product-details.php">Distinctive
+                                  Annie Sofa</a></h4>
+                          <span class="from">From</span>
+                          <p class="price">&euro; 1,309.00</p>
+                      </div>
+                  </div>
+                  <div class="card swiper-slide">
+                      <div class="image-box">
+                          <img
+                              src="img/categories/corner-sofas/corner-sofa-5.png"
+                              alt="">
+                      </div>
+                      <div class="product-details">
+                          <h4 class="name"><a href="product-details.php">Wandsworth
+                                  Corner Sofa</a></h4>
+                          <span class="from">From</span>
+                          <p class="price">&euro; 5,359.00</p>
+                      </div>
+                  </div>
+                  <div class="card swiper-slide">
+                      <div class="image-box">
+                          <img src="img/categories/sofas/sofa-6.png"
+                              alt="">
+                      </div>
+                      <div class="product-details">
+                          <h4 class="name"><a href="product-details.php">Distinctive
+                                  Wally Sofa</a></h4>
+                          <span class="from">From</span>
+                          <p class="price">&euro; 1,359.00</p>
+                      </div>
+                  </div>
+                  <div class="card swiper-slide">
+                      <div class="image-box">
+                          <img
+                              src="img/categories/bedstore-sofas/bedstore-sofa-6.png"
+                              alt="">
+                      </div>
+                      <div class="product-details">
+                          <h4 class="name"><a href="product-details.php">Manhattan
+                                  Bedstore Sofa</a></h4>
+                          <span class="from">From</span>
+                          <p class="price">&euro; 1,459.00</p>
+                      </div>
+                  </div>
+                  <div class="card swiper-slide">
+                      <div class="image-box">
+                          <img src="img/categories/sofas/sofa-7.png"
+                              alt="">
+                      </div>
+                      <div class="product-details">
+                          <h4 class="name"><a href="product-details.php">Distinctive
+                                  Flora Sofa</a></h4>
+                          <span class="from">From</span>
+                          <p class="price">&euro; 1,339.00</p>
+                      </div>
+                  </div>
+                  <div class="card swiper-slide">
+                      <div class="image-box">
+                          <img
+                              src="img/categories/bedstore-sofas/bedstore-sofa-5.jpg"
+                              alt="">
+                      </div>
+                      <div class="product-details">
+                          <h4 class="name"><a href="product-details.php">Wandsworth
+                                  Bedstore Sofa</a></h4>
+                          <span class="from">From</span>
+                          <p class="price">&euro; 1,589.00</p>
+                      </div>
+                  </div>
+                  <div class="card swiper-slide">
+                      <div class="image-box">
+                          <img
+                              src="img/categories/bedstore-sofas/bedstore-sofa-14.png"
+                              alt="">
+                      </div>
+                      <div class="product-details">
+                          <h4 class="name"><a href="product-details.php">Goodwood
+                                  Bedstore Sofa</a></h4>
+                          <span class="from">From</span>
+                          <p class="price">&euro; 1,549.00</p>
+                      </div>
+                  </div>
+              </div>
+              </div>
+              <div class="swiper-button-next swiper-navBtn"></div>
+              <div class="swiper-button-prev swiper-navBtn"></div>
+              <div class="swiper-pagination"></div>
+            </div>
+          </section>
+          <section class="trusted">
+            <div class="container justify-content-center container-xxl">
+              <h2 class="text-center">trusted by our customers</h2>
+              <div class="text-center">
+                <i class="fa-solid fa-star"></i><span>Trustpilot</span>
+              </div>
+              <div class="text-center">
+                <i class="fa-solid fa-star five"></i>
+                <i class="fa-solid fa-star five"></i>
+                <i class="fa-solid fa-star five"></i>
+                <i class="fa-solid fa-star five"></i>
+                <i class="fa-solid fa-star-half-stroke five"></i>
+              </div>
+              <div class="text-center">
+                <span class="text_left">TrustScore <b>4.5</b></span>
+                <span class="text_right"><b>613</b> reviews</span>
+              </div>
+            </div>
+          </section>
+          
+          <section class="logo-heading">
+            <div class="container container-xxl">
+              <h2>proud to be working with</h2>
+            </div>
+          </section>
+          <section class="customer-logos slider">
+            <div class="slide"><img src="img/logo-carousel/logo-ministryofdefence.png" width="91" height="80"></div>
+            <div class="slide"><img src="img/logo-carousel/logo-superdry.png" width="186" height="80"></div>
+            <div class="slide"><img src="img/logo-carousel/logo-surreycountycricketclub.png" width="120" height="80"></div>
+            <div class="slide"><img src="img/logo-carousel/logo-universityofoxford.png" width="206" height="80"></div>
+            <div class="slide"><img src="img/logo-carousel/logo-foreignandcommonwealthoffice.png" width="117" height="80"></div>
+            <div class="slide"><img src="img/logo-carousel/logo-rolex.png" width="144" height="80"></div>
+            <div class="slide"><img src="img/logo-carousel/logo-universityofcambridge.png" width="194" height="80"></div>
+            <div class="slide"><img src="img/logo-carousel/logo-itv.png" width="120" height="80"></div>
+            <div class="slide"><img src="img/logo-carousel/logo-radisson.png" width="159" height="80"></div>
+          </section>
+          <section class="distinctive">
+            <div class="container container-xxl">
+              <div class="row align-items-center">
+                <div class="col-lg-2"></div>
+                <div class="col-lg-8 text-center">
+                  <h2>restopedic by design</h2>
+                  <p>Our talented teams of experienced craftsmen make every single item in our collection by hand in our UK
+                    workshop to order, using the finest materials available.</p>
+                </div>
+                <div class="col-lg-2"></div>
+              </div>
+            </div>
+          </section>
+          <section class="british_design">
+            <div class="container container-xxl">
+              <div class="row">
+                <div class="col-lg-6">
+                  <img src="img/Map_v2.0-1.png" alt="">
+                </div>
+                <div class="col-lg-6">
+                  <h2>BRITISH DESIGN, AND HANDCRAFTED EXCELLENCE LOVED BY CUSTOMER ALL OVER THE WORLD</h2>
+                  <p>At Distinctive bedstore, we have stores all around the world. We're on a mission to give the world a
+                    taste of the distinct nature of our products.</p>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section class="card_section">
+            <div class="container-fluid container-xxl">
+              <h2 class="text-center">why you'll love<br> distinctive bedstore</h2>
+              <div class="row">
+                <div class="col-lg-4">
+                  <img src="img/Polaroid_1.png" alt="">
+                  <h3 class="text-center">handmade in yorkshire</h3>
+                  <p class="text-center">
+                    All of our sofas are handcrafted by our expert team based in Yorkshire. At Distinctive bedstores we
+                    pride ourselves on the personal touch. From manufacture to delivery - it's personal with us.
+                  </p>
+                </div>
+                <div class="col-lg-4">
+                  <img src="img/Polaroid_2.png" alt="">
+                  <h3 class="text-center">lifetime guarantee</h3>
+                  <p class="text-center">Here at Distinctive bedstores, because we are so confident in the quality and build
+                    of our sofas, we give a lifetime guarantee on all our sofas*</p>
+                </div>
+                <div class="col-lg-4">
+                  <img src="img/Polaroid_3.png" alt="">
+                  <h3 class="text-center">designed by us</h3>
+                  <p class="text-center">Our love of craft and design inspires us every day. Our expert designers care about
+                    every detail, from the studs to the wood finish. It's about creating amazing bedstore sofas that stand
+                    the test of time, whilst retaining iconic style.</p>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section class="in-stock">
+            <div class="container container-xxl">
+              <div class="row">
+                <div class="col-lg-6 col-md-12 col-sm-12 p-4">
+                  <img src="img/blenheim-1.jpg" alt="">
+                </div>
+                <div class="in-stock-col-2 col-lg-6 col-md-12 col-sm-12 ps-5">
+                  <h2>In Stock</h2>
+                  <p class="pe-5">At Distinctive bedstore we have stores all around the world. We're on a mission to give
+                    the world a taste of the distinct nature of our products.</p>
+                  <a href="instock.php">see what's in stock</a>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section class="newsletter" id="newsletter">
+            <div class="container container-xxl">
+              <div class="row">
+                <div class="col-lg-6 text-start d-flex justify-content-around">
+                  <i class="fa-solid fa-envelope-open-text"></i>
+                  <h2 class="ps-4">signup to our newsletter</h2>
+                </div>
+                <div class="col-lg-6">
+                  <div class="newslatter-item">
+                    <form class="subscribe-form" id="subscribe_form" method="POST">
+                      <input type="text" placeholder="Enter Your Mail" id="subscription-email" name="subscription-email">
+                      <button type="submit" name="subscribe">Subscribe</button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+          <footer class="footer-section">
+            <div class="container-fluid container-xxl">
+              <div class="text-center">
+                <img src="img/restopedic.png" class="img-fluid" alt="">
+              </div>
+              <div class="col-lg-12 text-center">
+                <ul class="list-unstyled">
+                  <li><a href="bedstore-sofas.php">bedstore sofas</a></li>
+                  <li><a href="corner-sofas.php">corner sofas</a></li>
+                  <li><a href="sofas.php">sofas</a></li>
+                  <li><a href="chairs.php">chairs</a></li>
+                  <li><a href="sofa-beds.php">sofa beds</a></li>
+                  <li><a href="stools&lounges.php">stools & chase lounges</a></li>
+                  <li><a href="instock.php">in stock</a></li>
+                </ul>
+              </div>
+              <div class="container d-flex justify-content-center">
+                <div class="col-lg-8">
+                  <p class="text-wrap text-center">
+                    Credit subject to status and affordability. Terms & Conditions Apply. Comfy Sofa Limited trading as
+                    Distinctive bedstores is a credit broker and is Authorised and Regulated by the Financial Conduct
+                    Authority. Credit is provided by Novuna Personal Finance, a trading style of Mitsubishi HC Capital UK PLC,
+                    authorised and regulated by the Financial Conduct Authority. Financial Services Register no. 704348. The
+                    register can be accessed through <a href="#">http://www.fca.org.uk.</a>
+                  </p>
+                  <p class="text-center"><a href="#" class="pe-2 border-warning border-end">Legal Notice</a>&nbsp;<a href="terms&conditions.html"
+                      class="ps-2">Terms & Conditions</a></p>
+                  <div class="text-center">
+                    <p class="website_link">Website Design by <a href="#" class="text-decoration-none">Webtrica</a></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </footer>
+          
+          <script src="js/jquery-3.3.1.min.js"></script>
+          <script src="js/bootstrap.min.js"></script>
+          <script src="js/jquery-ui.min.js"></script>
+          <script src="js/jquery.countdown.min.js"></script>
+          <script src="js/jquery.nice-select.min.js"></script>
+          <script src="js/jquery.zoom.min.js"></script>
+          <script src="js/jquery.dd.min.js"></script>
+          <script src="js/jquery.slicknav.js"></script>
+          <script src="js/owl.carousel.min.js"></script>
+          <script src="js/main.js"></script>
+          <!-- Swiper JS -->
+          <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+              <!-- Initialize Swiper -->
+              <script>
+                var swiper = new Swiper(".slide-container", {
+                  slidesPerView: 4,
+                  spaceBetween: 20,
+                  slidesPerGroup: 3,
+                  loop: true,
+                  centerSlide: "true",
+                  fade: "true",
+                  grabCursor: "true",
+                  pagination: {
+                    el: ".swiper-pagination",
+                    clickable: true,
+                    dynamicBullets: true,
+                  },
+                  navigation: {
+                    nextEl: ".swiper-button-next",
+                    prevEl: ".swiper-button-prev",
+                  },
+          
+                  breakpoints: {
+                    0: {
+                      slidesPerView: 1,
+                      slidesPerGroup: 1,
+                    },
+                    520: {
+                      slidesPerView: 1,
+                    },
+                    768: {
+                      slidesPerView: 2,
+                    },
+                    1000: {
+                      slidesPerView: 4,
+                    },
+                  },
+                });
+              </script>
+          
+          <script>
+            $(document).ready(function () {
+              $('.customer-logos').slick({
+                slidesToShow: 6,
+                slidesToScroll: 1,
+                autoplay: true,
+                autoplaySpeed: 1500,
+                arrows: false,
+                dots: false,
+                pauseOnHover: false,
+                responsive: [{
+                  breakpoint: 768,
+                  settings: {
+                    slidesToShow: 4
+                  }
+                }, {
+                  breakpoint: 520,
+                  settings: {
+                    slidesToShow: 2
+                  }
+                }]
+              });
+            });
+          </script>
+          <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.js"></script>
+          <script defer src="https://static.cloudflareinsights.com/beacon.min.js/vaafb692b2aea4879b33c060e79fe94621666317369993"
+            integrity="sha512-0ahDYl866UMhKuYcW078ScMalXqtFJggm7TmlUtp0UlD4eQk0Ixfnm5ykXKvGJNFjLMoortdseTfsRT8oCfgGA=="
+            data-cf-beacon='{"rayId":"76e7ec21cbead1e0","token":"cd0b4b3a733644fc843ef0b185f98241","version":"2022.11.3","si":100}'
+            crossorigin="anonymous"></script>
+            <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+          </body>
+          
+          </html>

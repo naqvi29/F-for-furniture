@@ -1,0 +1,200 @@
+<?php
+$title = "Foot Stools & Chaise Lounges | Distinctive Bedstore";
+include('header.php');
+include('connect.php');
+?>
+<div class="container-xxl product_heading">
+    <h2>Foot stools & chaise lounges</h2>
+</div>
+<section class="bedstore_sofas">
+    <div class="container-xxl">
+        <div class="row">
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <select class="form-select" name="" id="">
+                    <option value="" selected>Order by</option>
+                    <option value="">None</option>
+                    <option value="">Default</option>
+                    <option value="">Price: low to high</option>
+                    <option value="">Price: high to low</option>
+                </select>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <select class="form-select" name="" id="">
+                    <option value="">Price</option>
+                </select>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <select class="form-select" name="" id="">
+                    <option value="" selected>Seats</option>
+                    <option value="">None</option>
+                    <option value="">Footstools &amp; Chaise Lounges</option>
+                    <option value="">Chairs</option>
+                    <option value="">2 Seats</option>
+                    <option value="">3 Seats</option>
+                    <option value="">4 Seats</option>
+                </select>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="bedstore_products">
+    <div class="container-xxl">
+        <div class="row g-4">
+            <?php
+
+            if (isset($_GET['pageno'])) {
+                $pageno = $_GET['pageno'];
+            } else {
+                $pageno = 1;
+            }
+            $no_of_records_per_page = 12;
+            $offset = ($pageno - 1) * $no_of_records_per_page;
+
+            $total_pages_sql = "SELECT COUNT(*) FROM products WHERE p_cat = 5;";
+            $result = mysqli_query($conn, $total_pages_sql);
+            $total_rows = mysqli_fetch_array($result)[0];
+            $total_pages = ceil($total_rows / $no_of_records_per_page);
+
+            $sql = "SELECT * FROM products WHERE p_cat = 5 LIMIT $offset, $no_of_records_per_page";
+            $res_data = mysqli_query($conn, $sql);
+            while ($row = mysqli_fetch_array($res_data)) {
+            ?>
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <a href="product-details.php?id=<?php echo $row['p_id'] ?>">
+                        <div class="card">
+                            <img src="./uploaded-images/<?php echo $row['p_image']; ?>" class="card-img-top" alt="...">
+                            <div class="card-footer">
+                                <h5 class="card-title"><?php echo $row['p_name']; ?></h5>
+                                <p class="card-text">From &euro; <?php echo $row['p_price']; ?></p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            <?php
+            }
+            ?>
+        </div>
+        <?php
+        $query = "SELECT * FROM products WHERE p_cat = 5";
+        $res = mysqli_query($conn, $query);
+        $row = mysqli_num_rows($res);
+        if ($row > 12) {
+        ?>
+            <div class="container d-flex justify-content-center mt-5">
+                <nav class="Page navigation">
+                    <ul class="pagination">
+                        <li class="page-item">
+                            <a class="page-link" href="?pageno=1">First</a>
+                        </li>
+                        <li class="<?php if ($pageno <= 1) {
+                                        echo 'disabled';
+                                    } ?>">
+                            <a class="page-link" href="<?php if ($pageno <= 1) {
+                                                            echo '#';
+                                                        } else {
+                                                            echo "?pageno=" . ($pageno - 1);
+                                                        } ?>">Prev</a>
+                        </li>
+                        <li class="<?php if ($pageno >= $total_pages) {
+                                        echo 'disabled';
+                                    } ?>">
+                            <a class="page-link" href="<?php if ($pageno >= $total_pages) {
+                                                            echo '#';
+                                                        } else {
+                                                            echo "?pageno=" . ($pageno + 1);
+                                                        } ?>">Next</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="?pageno=<?php echo $total_pages; ?>">Last</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        <?php
+        }
+        mysqli_close($conn);
+        ?>
+    </div>
+</section>
+<section class="product_about_1">
+    <div class="container-xxl">
+        <div class="col-lg-12">
+            <p>Add a touch of class and sophistication to your home with our beautiful, handcrafted bedstore sofas.
+                Our bedstores built to the highest standards, using only the finest materials - meaning when you buy
+                a bedstore style sofa from us, it lasts a lifetime.</p>
+            <p>We've been making stunning bedstore sofas by hand for over ten years. We know that your sofa is more
+                than just a piece of furniture; it's a statement. That's why every bedstorecrafted by us comes with
+                a lifetime guarantee and the option for you to choose from a leather or velvet finish.</p>
+            <p>Find and customise your perfect bedstore settee today at Distinctive Bedstores.</p>
+        </div>
+    </div>
+</section>
+<section class="trusted">
+    <div class="container-xxl justify-content-center">
+        <h2 class="text-center">trusted by our customers</h2>
+        <div class="text-center">
+            <i class="fa-solid fa-star"></i><span>Trustpilot</span>
+        </div>
+        <div class="text-center">
+            <i class="fa-solid fa-star five"></i>
+            <i class="fa-solid fa-star five"></i>
+            <i class="fa-solid fa-star five"></i>
+            <i class="fa-solid fa-star five"></i>
+            <i class="fa-solid fa-star-half-stroke five"></i>
+        </div>
+        <div class="text-center">
+            <span class="text_left">TrustScore <b>4.5</b></span>
+            <span class="text_right"><b>613</b> reviews</span>
+        </div>
+    </div>
+</section>
+<section class="card_section">
+    <div class="container-fluid container-xxl">
+        <h2 class="text-center">why you'll love<br> distinctive bedstore</h2>
+        <div class="row">
+            <div class="col-lg-4">
+                <img src="img/Polaroid_1.png" alt="">
+                <h3 class="text-center">handmade in yorkshire</h3>
+                <p class="text-center">
+                    All of our sofas are handcrafted by our expert team based in Yorkshire. At Distinctive bedstores
+                    we
+                    pride ourselves on the personal touch. From manufacture to delivery - it's personal with us.
+                </p>
+            </div>
+            <div class="col-lg-4">
+                <img src="img/Polaroid_2.png" alt="">
+                <h3 class="text-center">lifetime guarantee</h3>
+                <p class="text-center">Here at Distinctive bedstores, because we are so confident in the quality and
+                    build
+                    of our sofas, we give a lifetime guarantee on all our sofas*</p>
+            </div>
+            <div class="col-lg-4">
+                <img src="img/Polaroid_3.png" alt="">
+                <h3 class="text-center">designed by us</h3>
+                <p class="text-center">Our love of craft and design inspires us every day. Our expert designers care
+                    about
+                    every detail, from the studs to the wood finish. It's about creating amazing bedstore sofas that
+                    stand
+                    the test of time, whilst retaining iconic style.</p>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="british_design">
+    <div class="container container-xxl">
+        <div class="row">
+            <div class="col-lg-6">
+                <img src="img/Map_v2.0-1.png" alt="">
+            </div>
+            <div class="col-lg-6">
+                <h2>BRITISH DESIGN, AND HANDCRAFTED EXCELLENCE LOVED BY CUSTOMER ALL OVER THE WORLD</h2>
+                <p>At Distinctive bedstore, we have stores all around the world. We're on a mission to give the
+                    world a
+                    taste of the distinct nature of our products.</p>
+            </div>
+        </div>
+    </div>
+</section>
+<?php
+include('footer.php');
+?>

@@ -1,0 +1,227 @@
+@media(max-width: 575px) {
+	.col_3 {
+		padding: 30px 0;
+	}
+
+	.col_3 h2 {
+		font-weight: 500;
+		font-size: 2rem;
+	}
+
+	.col_3 .col-lg-4 {
+		padding-bottom: 10px;
+	}
+
+	.col_3 .card-title {
+		font-size: 1.125rem;
+		padding: 10px 0;
+	}
+
+	.section_column h2 {
+		text-align: center;
+		font-weight: 400;
+		font-size: 1.625rem;
+	}
+
+	.section_column p {
+		text-align: center;
+		font-size: 1rem;
+	}
+
+	.trusted h2 {
+		font-weight: 600;
+		font-size: 1.125rem;
+		margin-bottom: 5px;
+	}
+
+	.trusted i {
+		font-size: 23px;
+		padding: 5px;
+	}
+
+	.trusted span {
+		font-weight: bold;
+		font-size: 1.1375rem;
+		padding-bottom: 5px;
+	}
+
+	.trusted .five {
+		font-size: 23px;
+	}
+
+	.visit .container-fluid h2 {
+		font-size: 1.625rem;
+		font-weight: 500;
+		padding: 10px 0;
+	}
+
+	.visit .centered h3 {
+		font-weight: 500;
+		font-size: 2rem;
+		letter-spacing: normal;
+	}
+
+	.visit .centered-1 a {
+		font-size: 12px;
+	}
+
+	.slick-slider {
+		display: inline;
+	}
+
+	.slick-list {
+		display: inline;
+	}
+
+	.distinctive .col-lg-8 {
+		padding: 20px 10px;
+	}
+
+	.distinctive .col-lg-8 h2 {
+		font-weight: 500;
+		font-size: 1.625rem;
+
+	}
+
+	.distinctive .col-lg-8 p {
+		font-size: 0.9375rem;
+	}
+
+	.distinctive .col-lg-8 a {
+		font-size: 0.9375rem;
+	}
+
+	.british_design {
+		padding: 10px 0;
+	}
+
+	.british_design .container h2 {
+		font-weight: 500;
+		font-size: 1.625rem;
+		letter-spacing: normal;
+		text-align: center;
+	}
+
+	.british_design .container p {
+		font-size: 1rem;
+		text-align: center;
+		font-weight: normal;
+	}
+
+	.card_section {
+		padding: 20px 5px;
+	}
+
+	.card_section .container-fluid h2 {
+		font-weight: 500;
+		margin-bottom: 10px;
+		font-size: 1.125rem;
+	}
+
+	.card_section .container-fluid img {
+		padding-left: 30px;
+	}
+
+	.card_section .container-fluid h3 {
+		font-size: 1.125rem;
+	}
+
+	.card_section .container-fluid p {
+		font-size: 1rem;
+		color: #000;
+		font-weight: 500;
+	}
+
+	.product_heading h2 {
+		padding: 10px 0;
+		text-align: center;
+	}
+
+	.bedstore_sofas select {
+		margin: 0 5px;
+		border: 2px solid #ebebeb;
+	}
+	.footer-section{
+		padding-bottom: 0;
+	}
+	.footer-section ul {
+		padding: 5px;
+	}
+
+	.footer-section ul li {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		padding: 2px 3px;
+		text-transform: uppercase;
+	}
+	.footer-section .link_last {
+		display: none;
+	}
+
+}
+
+
+
+@media(max-width: 768px) {
+	.col_3 .col-lg-4 {
+		padding-bottom: 10px;
+	}
+
+	.section_column h2 {
+		text-align: center;
+		font-weight: 600;
+	}
+
+	.section_column p {
+		text-align: center;
+	}
+
+	.section_column .col-lg-5 {
+		padding-right: 45px;
+	}
+
+	.visit {
+		padding-left: 10px;
+	}
+
+	.logo-heading {
+		padding: 10px;
+	}
+
+	.logo-heading h2 {
+		padding-bottom: 0;
+	}
+
+	.customer-logos {
+		padding: 20px 5px;
+	}
+
+	.card_section {
+		padding: 40px 5px;
+	}
+
+	.card_section .container-fluid h2 {
+		font-weight: 600;
+		margin-bottom: 10px;
+		font-size: 1.625rem;
+	}
+
+	.card_section .container-fluid img {
+		padding-left: 120px;
+	}
+
+	.card_section .container-fluid h3 {
+		font-size: 1.375rem;
+	}
+
+	.card_section .container-fluid p {
+		font-size: 1.125rem;
+		color: #000;
+		font-weight: 500;
+	}
+
+	.bedstore_products .col-lg-4 {
+		padding: 10px 5px;
+	}
+}
