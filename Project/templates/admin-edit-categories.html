@@ -1,0 +1,42 @@
+{% extends 'admin-layout.html' %}
+{% block title %} Edit Category | Admin Dashboard {% endblock %}
+{% block heading %} Edit Category {% endblock %}
+{% block page %} Edit Category {% endblock %}
+
+{% block head %} 
+{% endblock %}
+
+{% block content %}
+<section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card card-dark">
+            <div class="card-header">
+              <h3 class="card-title">Fill all required fields to Edit a Category</h3>
+            </div>
+            <!-- /.card-header -->
+            <!-- form start -->
+            <form action="/admin-edit/categories/{{data.id}}" method="post"> 
+              <div class="card-body">
+                <div class="form-group">
+                  <label for="exampleInputEmail1">name</label>
+                  <input type="text" name="name" class="form-control" id="exampleInputEmail1" required value="{{data.name}}">
+                </div>
+              </div>
+              <!-- /.card-body -->
+
+              <div class="card-footer">
+                <button type="submit" class="btn btn-success">Update</button>
+              </div>
+            </form>
+          </div>
+
+        </div>
+      </div>
+      <!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </section>
+{% endblock %}
+{% block scripts %} 
+  {% endblock %}

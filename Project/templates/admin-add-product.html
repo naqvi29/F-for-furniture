@@ -1,0 +1,348 @@
+{% extends 'admin-layout.html' %}
+{% block title %} Add Product | Admin Dashboard {% endblock %}
+{% block heading %} Add Product {% endblock %}
+{% block page %} Add Product {% endblock %}
+
+{% block head %}
+<style>
+  .preview {
+  width: 100%;
+  height: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+#preview {
+  max-width: 100%;
+  max-height: 300px;
+  display: block;
+}
+
+</style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+{% endblock %}
+<style>
+  .multiselect {
+    width: 200px !important;
+  }
+
+  .selectBox {
+    position: relative !important;
+  }
+
+  .selectBox select {
+    width: 100% !important;
+    font-weight: bold !important;
+  }
+
+  .overSelect {
+    position: absolute !important;
+    left: 0 !important;
+    right: 0 !important;
+    top: 0 !important;
+    bottom: 0 !important;
+  }
+
+  #checkboxes {
+    display: none !important;
+    border: 1px #dadada solid !important;
+  }
+
+  #checkboxes label {
+    display: block !important;
+  }
+
+  #checkboxes label:hover {
+    background-color: #1e90ff !important;
+  }
+  .image-preview {
+    display: none;
+  }
+
+
+</style>
+
+{% block content %}
+<section class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+      <div class="mt-2 mb-2 ml-5 mr-5 text-center">
+        <p><span style="font-weight:bolder">Note: </span> Please add all required sizes, leather_categories, colors, finishing_categories and finishing items first to add new product.</p>
+      </div>
+        <div class="card card-dark">
+          <div class="card-header  bg-primary text-white">
+            <h3 class="card-title">Basic Information</h3>
+          </div>
+          <!-- /.card-header -->
+          <!-- form start -->
+          <form id="form" action="/admin-add/product" method="post" enctype="multipart/form-data">
+            <div class="card-body">
+              <div class="form-group">
+                <label for="exampleInputEmail1">Name</label>
+                <input type="text" name="name" class="form-control" id="exampleInputEmail1" required>
+              </div>
+              <div class="form-group">
+                <label for="exampleInputEmail1">Brand</label>
+                <select class="form-control" name="brand_id" required>
+                  <option value="">Select a Brand</option>
+                  {% for i in brands %}
+                  <option value="{{i.id}}">{{i.name}}</option>
+                  {% endfor %}
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="exampleInputEmail1">Category</label>
+                <select class="form-control" id="category_id" name="category_id" onchange="category_select()" required>
+                  <option value="">Select a Category</option>
+                  {% for i in categories %}
+                  <option value="{{i.id}}">{{i.name}}</option>
+                  {% endfor %}
+                </select>
+              </div>
+                <div class="form-group" id="price">
+                </div>
+                <!-- <div class="form-group">
+                  <label for="exampleInputEmail1">Tags</label>
+                  <input type="text" name="tags" class="form-control" id="exampleInputEmail1">
+                </div> -->
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Price &pound;</label>
+                  <input type="number" min="1" name="price" class="form-control" id="price" required>
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Description</label>
+                  <input type="text" name="description" class="form-control" id="exampleInputEmail1" required>
+                </div>
+
+                <div class="container">
+                  <div class="row">
+                    <div class="col-md-6 mx-auto mt-5">
+                      <div class="custom-file">
+                        <input type="file" name="image" class="custom-file-input" id="customFile" required>
+                        <label class="custom-file-label" for="customFile">Upload Product Image</label>
+                      </div>
+                      <div style="display: none;" id="preview_div" class="preview mt-3">
+                        <img style="width: 20rem;" id="preview" src="#" alt="Preview" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- <div class="form-group">
+                  <label for="exampleInputFile">Image</label>
+                  <div class="input-group">
+                    <div class="custom-file">
+                      <input type="file" name="image" class="custom-file-input" id="exampleInputFile" required>
+                      <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                    </div>
+                    <div class="input-group-append">
+                      <span class="input-group-text">Upload</span>
+                    </div>
+                  </div>
+                </div> -->
+              </div>
+              <!-- /.card-body -->
+
+              <!-- <div class="card-footer">
+                <button type="submit" class="btn btn-success">Add</button>
+              </div> -->
+        </div>
+        <div class="card card-dark">
+          <div class="card-header bg-primary text-white" >
+            <h3 class="card-title">Sizes</h3>
+          </div>
+          <!-- /.card-header -->
+          <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+            <div class="card-body">
+              <div class="form-group">
+                <select name="color_ids" class="selectpicker3 form-control" multiple data-live-search="true">
+                  {% for i in sizes %}
+                  <option value="{{i.id}}">{{i.name}}</option>
+                  {% endfor %}
+                  <!-- <option>Option 2</option>
+                  <option>Option 3</option>
+                  <option>Option 4</option>
+                  <option>Option 5</option> -->
+                </select>
+              </div>
+              
+            </div>
+          </div>
+            <!-- /.card-body -->
+
+            
+            
+        </div>
+        <div class="card card-dark">
+          <div class="card-header bg-primary text-white" >
+            <h3 class="card-title">Leather Fabrics / Colors</h3>
+          </div>
+          <!-- /.card-header -->
+          <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+            <div class="card-body">
+              <div class="form-group">
+                <select name="color_ids" class="selectpicker form-control" multiple data-live-search="true">
+                  {% for i in colors %}
+                  <option value="{{i.id}}">{{i.name}}</option>
+                  {% endfor %}
+                  <!-- <option>Option 2</option>
+                  <option>Option 3</option>
+                  <option>Option 4</option>
+                  <option>Option 5</option> -->
+                </select>
+              </div>
+              
+            </div>
+          </div>
+            <!-- /.card-body -->
+
+            
+            
+        </div>
+        <div class="card card-dark">
+          <div class="card-header bg-primary text-white" >
+            <h3 class="card-title">Finishing Touches</h3>
+          </div>
+          <!-- /.card-header -->
+          <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+            <div class="card-body">
+              <div class="form-group">
+                <select name="finishing_items" class="selectpicker2 form-control" multiple data-live-search="true">
+                  {% for i in finishing_items %}
+                  <option value="{{i.id}}">{{i.name}}</option>
+                  {% endfor %}
+                  <!-- <option>Option 2</option>
+                  <option>Option 3</option>
+                  <option>Option 4</option>
+                  <option>Option 5</option> -->
+                </select>
+              </div>
+              
+            </div>
+          </div>
+            <!-- /.card-body -->
+
+            
+          <!-- </form> -->
+        </div>
+        <div class="text-center m-5">
+            <button type="submit" class="btn btn-lg btn-success">Add</button>
+        </div>
+        </form>
+
+
+      </div>
+    </div>
+    <!-- /.row -->
+  </div><!-- /.container-fluid -->
+</section>
+{% endblock %}
+{% block scripts %}
+
+<!-- for image uploader bootstrap  -->
+<!-- <script>
+    var imageUpload = document.getElementById("image-upload");
+    var imagePreview = document.getElementById("image-preview");
+    var imagePreviewImg = document.getElementById("size_img_1");
+
+    imageUpload.addEventListener("change", function() {
+      var file = this.files[0];
+
+      if (file) {
+        var reader = new FileReader();
+
+        reader.addEventListener("load", function() {
+          imagePreviewImg.setAttribute("src", this.result);
+          imagePreview.style.display = "block";
+        });
+
+        reader.readAsDataURL(file);
+      } else {
+        imagePreviewImg.setAttribute("src", "#");
+        imagePreview.style.display = "none";
+      }
+    });
+
+</script> -->
+<!-- --- -->
+<script>
+  const input = document.querySelector('input[type="file"]');
+  const preview = document.querySelector('#preview');
+
+  input.addEventListener("change", function () {
+    const file = this.files[0];
+    if (file) {
+      const reader = new FileReader();
+
+      reader.addEventListener("load", function () {
+        preview.src = reader.result;
+        document.getElementById("preview_div").style.display='block';
+      });
+
+      reader.readAsDataURL(file);
+    } else {
+      preview.src = "";
+    }
+  });
+
+</script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+
+
+<script>
+  $(document).ready(function() {
+    $('.selectpicker').selectpicker();
+  });
+  $(document).ready(function() {
+    $('.selectpicker2').selectpicker();
+  });
+  $(document).ready(function() {
+    $('.selectpicker3').selectpicker();
+  });
+  </script>
+  <script>
+    $('form').submit(function() {
+    var selected_options = $('.selectpicker').val();
+    $('<input>').attr({
+      type: 'hidden',
+      name: 'color_ids',
+      value: selected_options
+    }).appendTo('form');
+  });
+    $('form').submit(function() {
+    var selected_options = $('.selectpicker2').val();
+    $('<input>').attr({
+      type: 'hidden',
+      name: 'finishing_items',
+      value: selected_options
+    }).appendTo('form');
+  });
+    $('form').submit(function() {
+    var selected_options = $('.selectpicker3').val();
+    $('<input>').attr({
+      type: 'hidden',
+      name: 'sizes',
+      value: selected_options
+    }).appendTo('form');
+  });
+  </script>
+{% if error %}
+<script>
+  Swal.fire({
+    icon: 'error',
+    title: 'Oops...',
+    text: '{{error}}',
+  })
+
+</script>
+{% endif %}
+
+{% endblock %}

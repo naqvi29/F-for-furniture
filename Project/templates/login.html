@@ -1,0 +1,53 @@
+{% extends 'layout.html' %} 
+{% block title %}Login | Restopedic {% endblock %}
+{% block content %}
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <div class="register-login-section spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 offset-lg-3">
+                    <div class="login-form">
+                        <h2>LOGIN</h2>
+                        <form action="/login" method="post">
+                            <div class="group-input">
+                                <label for="username">Email Address</label>
+                                <input type="email" id="username" name="email" required>
+                            </div>
+                            <div class="group-input">
+                                <label for="pass">Password *</label>
+                                <input type="password" id="pass" name="password" required>
+                            </div>
+                            <div class="group-input gi-check">
+                                <div class="gi-more">
+                                    <label for="save-pass">
+                                        Save Password
+                                        <input type="checkbox" id="save-pass">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <!-- <a href="#" class="forget-pass">Forget your Password</a> -->
+                                </div>
+                            </div>
+                            <button type="submit" class="site-btn login-btn">Sign In</button>
+                        </form>
+                        <div class="switch-login">
+                            <a href="/login2" class="or-login">Sign In with google</a>
+                        </div>
+                        <div class="switch-login">
+                            <a href="/signup" class="or-login">Or Create An Account</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% if error %} 
+    <script>
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: '{{error}}',
+            })
+    </script>
+    {% endif %}
+    {% endblock %}

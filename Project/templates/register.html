@@ -1,0 +1,51 @@
+{% extends 'layout.html' %} 
+{% block title %}Signup | Restopedic {% endblock %}
+{% block content %}
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <div class="register-login-section spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 offset-lg-3">
+                    <div class="register-form">
+                        <h2>REGISTRATION</h2>
+                        <form action="/signup" method="post">
+                            <div class="group-input">
+                                <label for="username">Email address *</label>
+                                <input type="email" id="email" name="email">
+                            </div>
+                            
+                            <div class="group-input">
+                                <label for="username">Full Name</label>
+                                <input type="text" id="fullname" name="fullname" required>
+                            </div>
+                            <div class="group-input">
+                                <label for="pass">Password *</label>
+                                <input type="text" id="password" name="password" required>
+                            </div>
+                            <div class="group-input">
+                                <label for="con-pass">Confirm Password *</label>
+                                <input type="text" id="con-pass" name="confpassword" required>
+                            </div>
+                            <button type="submit" class="site-btn register-btn">SIGN UP</button>
+                        </form>
+                        <div class="switch-login">
+                            <a href="/login" class="or-login">Or Sign In</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% if error %} 
+    <script>
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: '{{error}}',
+            })
+    </script>
+    {% endif %}
+    {% endblock %} 
+    
+    

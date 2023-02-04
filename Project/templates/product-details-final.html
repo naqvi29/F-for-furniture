@@ -1,0 +1,833 @@
+{% extends 'layout.html' %} 
+{% block title %}Product Name | Restopedic{% endblock %}
+{% block head %}
+<link rel="stylesheet" href="/static/assets/css2/nav.css">
+<link rel="stylesheet" href="/static/assets/css2/responsive-style.css">
+<style>
+    .image-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+</style>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+{% endblock %}
+
+{% block content %}
+        <section class="product_view" id="default">
+            <div class="container-fluid container-xxl">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        <img
+                            src="/static/assets/img/products/{{product.image}}"
+                            class="zoomImg" alt="">
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        <h2>{{product.name}}</h2>
+                        <p>{{product.description}}</p>
+                        
+                        <input style="display: none;" type="text" id="product_id" value="{{product.id}}">
+                        <input style="display: none;" type="text" id="color_name" value="">
+                        <input style="display: none;" type="text" id="size_name" value="">
+                        <input style="display: none;" type="text" id="finishing_item_value" value="">
+                        <input style="display: none;" type="text" id="border" value="">
+                        <input style="display: none;" type="text" id="wood" value="">
+                        <input style="display: none;" type="text" id="stud" value="">
+                        <h5>From:</h5>
+                        <input disabled style="display:none;" type="text" id="from_price" value="{{product.price}}">
+                        <h4>&euro; {{ "{:,.0f}".format(product.price) }}</h4>
+                        <div class="input-group">
+                            <input type="button" value="-" class="button-minus" data-field="quantity">
+                            <input type="number" step="1" value="1" id="qty" name="quantity" class="quantity-field">
+                            <input type="button" value="+" class="button-plus" data-field="quantity">
+                          </div>
+                        <hr class="mb-4">
+                        <button id="customize&buy_btn" onclick="scrollToElement('product-section')" class="mt-4 buy-btn">CUSTOMIZE & BUY</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="product-design" id="product-section">
+            <div class="container-fluid">
+                <div class="col-lg-12">
+                    <div class="header">Customize & Buy</div>
+                </div>
+                <div class="container-fluid" id="customize&buy">
+                    <div class="row">
+                        <div class="col-lg-9">
+                            <ul class="nav nav-pills mb-3" id="pills-tab"
+                                role="tablist">
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link active"
+                                        id="pills-home-tab"
+                                        data-bs-toggle="pill"
+                                        data-bs-target="#pills-home"
+                                        type="button" role="tab"
+                                        aria-controls="pills-home"
+                                        aria-selected="true">Choose a Size</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link"
+                                        id="pills-profile-tab"
+                                        data-bs-toggle="pill"
+                                        data-bs-target="#pills-profile"
+                                        type="button" role="tab"
+                                        aria-controls="pills-profile"
+                                        aria-selected="false">Choose a
+                                        Leather/Fabric</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link"
+                                        id="pills-contact-tab"
+                                        data-bs-toggle="pill"
+                                        data-bs-target="#pills-contact"
+                                        type="button" role="tab"
+                                        aria-controls="pills-contact"
+                                        aria-selected="false">Finishing Touches</button>
+                                </li>
+                            </ul>
+                            <div class="tab-content" id="pills-tabContent">
+                                <div class="tab-pane fade show active"
+                                    id="pills-home" role="tabpanel"
+                                    aria-labelledby="pills-home-tab">
+                                    <div class="row g-3">
+                                        <h4 class="heading">Size</h4>
+                                        {% for i in sizes %}
+                                        <div class="col-lg-6" onclick='select_size("{{i[0].id}}","{{i[0].name}}","{{i[0].additional_cost}}","{{i[0].image}}")'>
+                                            <div class="option">
+                                                <h5 class="mb-0"><strong>{{i[0].name}}</strong><span class="check_span" style="margin-left:3rem;" id="{{i[0].id}}_check_span">
+                                                        </span>
+                                                        </h5>
+                                                        
+                                                    <img src="/static/assets/img/size-images/{{i[0].image}}" class="img-fluid"
+                                                    width="440" height="273"
+                                                    alt="">
+                                                <div class="d-flex
+                                                    justify-content-between">
+                                                    <p class="mb-0 from">From:</p>
+                                                    <p class="mb-0 price">&euro;{{"{:,.0f}".format(i[0].additional_cost+product.price)}}</p>
+                                                </div>
+                                                <table class="table">
+                                                    <tbody>
+                                                        
+                                                        <tr>
+                                                            <td><span>H</span>{{i[0].height}}cm</td>
+                                                            <td><span>W</span>{{i[0].width}}cm</td>
+                                                            <td><span>D</span>{{i[0].depth}}cm</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="pills-profile"
+                                    role="tabpanel"
+                                    aria-labelledby="pills-profile-tab">
+                                    <ul class="nav nav-tabs secondary" id="myTab" role="tablist">
+                                        <li class="nav-item" role="presentation">
+                                          <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Colour</button>
+                                        </li>
+                                      </ul>
+                                      <div class="tab-content" id="myTabContent">
+                                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                                
+                                                  
+                                                  <h4 class="tab-heading">Choose A Leather/Fabric</h4>
+                                                  <div class="row g-4">
+                                                    {% for leather_category in leather_categories %}
+                                                    <div class="col-12 col-md-6 col-lg-6">
+                                                        <h5>{{leather_category.name}} (+£{{"{:,.0f}".format(leather_category.additional_price)}})</h5>
+                                                        <div class="row justify-content-start">
+                                                            {% for color in leather_category.colors %}
+                                                            <div class="col-3 col-md-2 col-lg-2 whites-and-neutrals"  onclick='select_color("{{color[0].id}}","{{color[0].name}}","{{leather_category.additional_price}}","{{color[0].image}}")' id="whites-and-neutrals">
+                                                                <img src="/static/assets/img/color-images/{{color[0].image}}" width="60" height="300" class="img-fluid color-img" alt="">
+                                                                <div class="swatch-title text-wrap" style="width: 4rem;">{{color[0].name}}</div><span id="{{color[0].id}}-span" class="span-check"></span>
+                                                            </div>
+                                                            {% endfor %}
+                                                            <!-- <div onclick="select_color(this)" class="col-3 col-md-2 col-lg-2 black-greys" id="black-greys">
+                                                                <img src="/static/assets/img/EVEREST-GREY-1-150x150.jpg" width="60" height="300" class="img-fluid color-img" alt="">
+                                                                <div class="swatch-title text-wrap" style="width: 4rem;">House Boucle Grey</div><span id="black-greys-span" class="span-check"></span>
+                                                            </div> -->
+                                                        </div>
+                                                    </div>
+                                                    {% endfor %}
+                                                  </div>
+                                        </div>
+                                      </div>
+                                </div>
+                                <div class="tab-pane fade" id="pills-contact"
+                                    role="tabpanel"
+                                    aria-labelledby="pills-contact-tab">
+                                    <h4 class="tab-heading">Finishing Touches</h4>
+                                    {% for finishing_category in finishing_categories %}
+                                    <div class="row justify-content-start my-4">
+                                        <h5 class="cushion-heading">{{finishing_category.name}}</h5>
+                                        {% for finishing_item in finishing_category['finishing_items'] %}
+                                        <div class="col-lg-3" >
+                                            <div class="option cushion-div"id="foam&fibre-{{finishing_item[0].id}}" onclick='select_finishing("{{finishing_item[0].id}}","{{finishing_item[0].name}}","{{finishing_item[0].additional_price}}","{{finishing_item[0].image}}")' onclick="cushion_select(this)" >
+                                                <img src="/static/assets/img/finishing-item-images/{{finishing_item[0].image}}" style="margin-bottom: 0.9375rem;" width="600" height="258" class="img-fluid" alt="">
+                                                <h4 class="text-end">{{finishing_item[0].name}}</h4>
+                                                <!-- <p class="mb-0 finishing-p">AS Standard</p> -->
+                                                
+                                                <h3 class="text-end mb-0 price">£{{"{:,.0f}".format(finishing_item[0].additional_price)}}</h3>
+                                            </div><span id="{{finishing_item[0].id}}-span-check" class="span-check2"></span>
+                                            <!-- </div><span id="foam&fibre-span" class="span-check2"><i class="fa-solid fa-check"></i></span> -->
+                                        </div>
+                                        {% endfor %}
+                                        <!-- <div class="col-lg-3"  >
+                                            <div class="option cushion-div" id="feather&foam" onclick="cushion_select(this)">
+                                                <img src="/static/assets/img/foam_and_fibre.png" style="margin-bottom: 0.9375rem;" width="600" height="258" class="img-fluid cushion-img" alt="">
+                                                <h4 class="text-end">Feather & Foam</h4>
+                                                <h3 class="text-end mb-0 price">£49.00</h3>
+                                            </div><span id="feather&foam-span" class="span-check2"></span>
+                                        </div> -->
+                                    </div>
+                                    {% endfor %}
+                                    <!-- <div class="row justify-content-start mt-2">
+                                        <h5 class="cushion-heading">Seating</h5>
+                                        <div class="col-lg-3">
+                                            <div class="option" style="border: 2px solid #e7ab3c;">
+                                                <img src="/static/assets/img/Seat-cushion-x-1.png" style="margin-bottom: 0.9375rem;" width="600" height="258" class="img-fluid" alt="">
+                                                <h4 class="text-end">1 Seat Cushion</h4>
+                                                <p class="mb-0 finishing-p">AS Standard</p>
+                                            </div><span id="foam&fibre-span" class="span-check2"><i class="fa-solid fa-check"></i></span>
+                                        </div>
+                                    </div>
+                                    <div class="row justify-content-start mt-2">
+                                        <h5 class="cushion-heading">Front Border</h5>
+                                        <div class="col-lg-3">
+                                            <div class="option border_div" onclick="border_select(this)" id="single_buttoned" style="border: 2px solid #e7ab3c;">
+                                                <img src="/static/assets/img/single_buttoned-1.png" style="margin-bottom: 0.9375rem;" width="600" height="258" class="img-fluid" alt="">
+                                                <h4 class="text-end">Single Buttoned</h4>
+                                                <p class="mb-0 finishing-p">AS Standard</p>
+                                            </div><span id="single_buttoned-span" class="span-check3"><i class="fa-solid fa-check"></i></span>
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <div class="option border_div" onclick="border_select(this)" id="plain_border">
+                                                <img src="/static/assets/img/plain_border-4.png" style="margin-bottom: 0.9375rem;" width="600" height="258" class="img-fluid" alt="">
+                                                <h4 class="text-end">Plain Border</h4>
+                                                <h3 class="text-end mb-0 price">£29</h3>
+                                            </div><span id="plain_border-span" class="span-check3"></span>
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <div class="option border_div" onclick="border_select(this)" id="pleated_border">
+                                                <img src="/static/assets/img/pleated_border-2.png" style="margin-bottom: 0.9375rem;" width="600" height="258" class="img-fluid" alt="">
+                                                <h4 class="text-end">Pleated Border</h4>
+                                                <h3 class="text-end mb-0 price">£29</h3>
+                                            </div><span id="pleated_border-span" class="span-check3"></span>
+                                        </div>
+                                    </div>
+                                    <div class="row justify-content-start mt-2">
+                                        <h5 class="cushion-heading">Wood Stain</h5>
+                                        <div class="col-lg-3">
+                                            <div class="option wood_div" onclick="wood_select(this)" id="Mahogany" style="border: 2px solid #e7ab3c;">
+                                                <img src="/static/assets/img/mahogany_feature.png" style="margin-bottom: 0.9375rem;" width="600" height="258" class="img-fluid" alt="">
+                                                <h4 class="text-end">Mahogany</h4>
+                                                <p class="mb-0 finishing-p">AS Standard</p>
+                                            </div><span id="Mahogany-span" class="span-check4"><i class="fa-solid fa-check"></i></span>
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <div class="option wood_div" onclick="wood_select(this)" id="Black">
+                                                <img src="/static/assets/img/black_featured_image.png" style="margin-bottom: 0.9375rem;" width="600" height="258" class="img-fluid" alt="">
+                                                <h4 class="text-end">Black</h4>
+                                                <h3 class="text-end mb-0 price">£49</h3>
+                                            </div><span id="Black-span" class="span-check4"></span>
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <div class="option wood_div" onclick="wood_select(this)" id="Oak">
+                                                <img src="/static/assets/img/oak_featured_image.png" style="margin-bottom: 0.9375rem;" width="600" height="258" class="img-fluid" alt="">
+                                                <h4 class="text-end">Oak</h4>
+                                                <h3 class="text-end mb-0 price">£49</h3>
+                                            </div><span id="Oak-span" class="span-check4"></span>
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <div class="option wood_div" onclick="wood_select(this)" id="White">
+                                                <img src="/static/assets/img/white_featured_image.png" style="margin-bottom: 0.9375rem;" width="600" height="258" class="img-fluid" alt="">
+                                                <h4 class="text-end">White</h4>
+                                                <h3 class="text-end mb-0 price">£49</h3>
+                                            </div><span id="White-span" class="span-check4"></span>
+                                        </div>
+                                    </div>
+                                    <div class="row justify-content-start mt-2">
+                                        <h5 class="cushion-heading">Stud Finish</h5>
+                                        <div class="col-lg-3">
+                                            <div class="option stud_div" onclick="stud_select(this)" id="Bronze_Renaissance" style="border: 2px solid #e7ab3c;">
+                                                <img src="/static/assets/img/bronze2_featured-1.png" style="margin-bottom: 0.9375rem;" width="600" height="258" class="img-fluid" alt="">
+                                                <h4 class="text-start">Bronze Renaissance</h4>
+                                                <p class="mb-0 finishing-p">AS Standard</p>
+                                            </div><span id="Bronze_Renaissance-span" class="span-check5"><i class="fa-solid fa-check"></i></span>
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <div class="option stud_div" onclick="stud_select(this)" id="Chrome">
+                                                <img src="/static/assets/img/chrome_feature.png" style="margin-bottom: 0.9375rem;" width="600" height="258" class="img-fluid" alt="">
+                                                <h4 class="text-end">Chrome</h4>
+                                                <h3 class="text-end mb-0 price">£49</h3>
+                                            </div><span id="Chrome-span" class="span-check5"></span>
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <div class="option stud_div" onclick="stud_select(this)" id="Gun_Metal">
+                                                <img src="/static/assets/img/gunmetal2_feature-1.png" style="margin-bottom: 0.9375rem;" width="600" height="258" class="img-fluid" alt="">
+                                                <h4 class="text-end">Gun Metal</h4>
+                                                <h3 class="text-end mb-0 price">£49</h3>
+                                            </div><span id="Gun_Metal-span" class="span-check5"></span>
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <div class="option stud_div" onclick="stud_select(this)" id="Leather_Or_Fabric_Piping">
+                                                <img src="/static/assets/img/nostuds_leather_piping-2.png" style="margin-bottom: 0.9375rem;" width="600" height="258" class="img-fluid" alt="">
+                                                <h4 class="text-end">Leather Or Fabric Piping</h4>
+                                                <h3 class="text-end mb-0 price">£99</h3>
+                                            </div><span id="Leather_Or_Fabric_Piping-span" class="span-check5"></span>
+                                        </div>
+                                    </div> -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 aside">
+                            <div class="position-sticky">
+                            <h4 class="product-title">{{product.name}}</h4>                            
+                            <img id="size_image" src="/static/assets/img/products/{{product.image}}" alt="">
+
+                            <div class="image-container">
+                            
+                            <img id="color_image" style="width: 3rem;margin: 10px 0px; display: none;" src="#" alt="">
+
+                            <img id="finishing_image" style="width: 3rem;margin: 10px 0px; display: none;" src="#" alt="">
+                            </div>
+                            
+                            <hr>
+                            <p class="mb-0"><strong>Size</strong></p>
+                            <div class="d-flex justify-content-between">
+                                <div id="side-size" class="size-text"></div>
+                                <div class="price">&euro;<span id="side-size-price"></span></div>
+                            </div>
+                            <p class="mb-0">
+                                <!-- <strong>Antique Leathers (Price Band A)</strong> -->
+                                <strong>Color</strong>
+                                </p>
+                            <div class="d-flex justify-content-between">
+                                <div class="size-text" id="side-color">Antique Red</div>
+                                
+                                <div class="price">&euro;<span id="side-color-price"></span></div>
+                                <!-- <div class="price" id="side-color-price">&euro;0</div> -->
+                            </div>
+                            <p class="mb-0"><strong>Cushion Filling</strong></p>
+                            <div class="d-flex justify-content-between">
+                                <div class="size-text" id="cushion-flling">Foam & Fibre</div>
+                                <div class="price">&euro;<span  id="cushion-flling-price"></span></div>
+                            </div>
+                            <h2 class="product-price">&euro;<span id="product-total">{{ "{:,.0f}".format(product.price) }}</span></h2>
+                            {% if loggedin %}
+                                <a onclick="return add_to_cart()"  class="primary-btn proceed-btn">Proceed
+                                <i class="ms-2 fa-solid fa-angle-right"></i></a>
+                            {% else %}
+                                <a onclick="return login()"  class="primary-btn proceed-btn">Proceed
+                                <i class="ms-2 fa-solid fa-angle-right"></i></a>
+                            {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="product_services">
+            <div class="container container-xxl">
+                <div class="row">
+                    <div class="col-lg-4 text-center">
+                        <img src="/static/assets/img/product-detail-carousel/dc_icon_van.svg"
+                            width="135" height="135" alt="">
+                        <h3>assembly</h3>
+                        <p>We can deliver it straight to you,
+                            and takeaway all the packaging.</p>
+                    </div>
+                    <div class="col-lg-4 text-center">
+                        <img
+                            src="/static/assets/img/product-detail-carousel/dc_icon_calendar.svg"
+                            width="135" height="135" alt="">
+                        <h3>lifetime guarantee</h3>
+                        <p>We're that confident - we give you a lifetime
+                            guarantee on our sofas*</p>
+                    </div>
+                    <div class="col-lg-4 text-center">
+                        <img src="/static/assets/img/product-detail-carousel/dc_icon_badge.svg"
+                            width="135" height="135" alt="">
+                        <h3>12 month cover warantee</h3>
+                        <p>Rest assured that your new sofa covering is protected
+                            against any defects for 12 months.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="trusted">
+            <div class="container container-xxl justify-content-center">
+                <h2 class="text-center">trusted by our customers</h2>
+                <div class="text-center">
+                    <i class="fa-solid fa-star"></i><span>Trustpilot</span>
+                </div>
+                <div class="text-center">
+                    <i class="fa-solid fa-star five"></i>
+                    <i class="fa-solid fa-star five"></i>
+                    <i class="fa-solid fa-star five"></i>
+                    <i class="fa-solid fa-star five"></i>
+                    <i class="fa-solid fa-star-half-stroke five"></i>
+                </div>
+                <div class="text-center">
+                    <span class="text_left">TrustScore <b>4.5</b></span>
+                    <span class="text_right"><b>613</b> reviews</span>
+                </div>
+            </div>
+        </section>
+        <section class="card_section">
+            <div class="container-fluid container-xxl">
+                <h2 class="text-center">why you'll love<br> Restopedic Limited</h2>
+                <div class="row">
+                    <div class="col-lg-4">
+                        <img src="/static/assets/img/Polaroid_1.png" alt="">
+                        <h3 class="text-center">handmade in yorkshire</h3>
+                        <p class="text-center">
+                            All of our sofas are handcrafted by our expert team
+                            based in Yorkshire. At Restopedic Limited
+                            we
+                            pride ourselves on the personal touch. From
+                            manufacture to delivery - it's personal with us.
+                        </p>
+                    </div>
+                    <div class="col-lg-4">
+                        <img src="/static/assets/img/Polaroid_2.png" alt="">
+                        <h3 class="text-center">lifetime guarantee</h3>
+                        <p class="text-center">Here at Restopedic Limited,
+                            because we are so confident in the quality and
+                            build
+                            of our sofas, we give a lifetime guarantee on all
+                            our sofas*</p>
+                    </div>
+                    <div class="col-lg-4">
+                        <img src="/static/assets/img/Polaroid_3.png" alt="">
+                        <h3 class="text-center">designed by us</h3>
+                        <p class="text-center">Our love of craft and design
+                            inspires us every day. Our expert designers care
+                            about
+                            every detail, from the studs to the wood finish.
+                            It's about creating amazing bedstore sofas that
+                            stand
+                            the test of time, whilst retaining iconic style.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="british_design">
+            <div class="container container-xxl">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <img src="/static/assets/img/Map_v2.0-1.png" alt="">
+                    </div>
+                    <div class="col-lg-6">
+                        <h2>BRITISH DESIGN, AND HANDCRAFTED EXCELLENCE LOVED BY
+                            CUSTOMER ALL OVER THE WORLD</h2>
+                        <p>At Restopedic Limited, we have stores all around
+                            the world. We're on a mission to give the
+                            world a
+                            taste of the distinct nature of our products.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        {% endblock %}
+
+{% block scripts %} 
+<script>
+            function incrementValue(e) {
+              e.preventDefault();
+              var fieldName = $(e.target).data('field');
+              var parent = $(e.target).closest('div');
+              var currentVal = parseInt(parent.find('input[name=' + fieldName + ']').val(), 10);
+            
+              if (!isNaN(currentVal)) {
+                parent.find('input[name=' + fieldName + ']').val(currentVal + 1);
+              } else {
+                parent.find('input[name=' + fieldName + ']').val(0);
+              }
+            }
+            
+            function decrementValue(e) {
+              e.preventDefault();
+              var fieldName = $(e.target).data('field');
+              var parent = $(e.target).closest('div');
+              var currentVal = parseInt(parent.find('input[name=' + fieldName + ']').val(), 10);
+            
+              if (!isNaN(currentVal) && currentVal > 0) {
+                parent.find('input[name=' + fieldName + ']').val(currentVal - 1);
+              } else {
+                parent.find('input[name=' + fieldName + ']').val(0);
+              }
+            }
+            
+            $('.input-group').on('click', '.button-plus', function(e) {
+              incrementValue(e);
+            });
+            
+            $('.input-group').on('click', '.button-minus', function(e) {
+              decrementValue(e);
+            });
+            
+</script>
+<script>
+    function select_size(id,size,price,image){
+        console.log(image);
+        all_check_span = document.getElementsByClassName("check_span");
+        for (let i = 0; i < all_check_span.length; i++) {
+            all_check_span[i].innerHTML='';
+        }
+        from_price = parseFloat(document.getElementById("from_price").value);
+        document.getElementById(id+"_check_span").innerHTML=`<i class="fa-solid fa-check"></i>`;
+        document.getElementById("side-size").innerHTML='';
+        document.getElementById("side-size").innerHTML=size;
+        document.getElementById("size_name").value=size;
+        total_price = parseFloat(price)+from_price;
+        document.getElementById("side-size-price").innerHTML=price;
+
+        from_price = parseFloat(document.getElementById('from_price').value);
+        if(!from_price){
+            from_price=0;
+        } 
+        color_price = parseFloat(document.getElementById('side-color-price').innerHTML);
+        if(!color_price){
+            color_price=0;
+        }        
+        cushion_flling_price = parseFloat(document.getElementById('cushion-flling-price').innerHTML);
+        if(!cushion_flling_price){
+            cushion_flling_price=0;
+        }  
+        updated_price = from_price+cushion_flling_price+color_price+parseFloat(price)        
+        document.getElementById("product-total").innerHTML='';
+        document.getElementById("product-total").innerHTML=updated_price;
+
+        // document.getElementById("product-total").innerHTML=total_price;
+        document.getElementById("size_image").src = "/static/assets/img/size-images/"+image;
+    }
+</script>
+<script>
+    function select_color(id,name,additional_price,image){
+        prev_img = document.getElementsByClassName("color-img");
+        for(i=0;i<prev_img.length;i++){
+            prev_img[i].style.border = "none";
+        }
+
+        // console.log(element);
+        // console.log(element.id);
+        // var child = element.childNodes[3];
+        // name = child.innerHTML;
+        // console.log("child: ",child)
+
+        // var image = element.childNodes[1]
+        
+        
+        // var parent = element.parentNode[2];
+        // console.log("parent: ",parent)
+        prev = document.getElementsByClassName("span-check");
+        for(i=0;i<prev.length;i++){
+            prev[i].innerHTML=``;
+        }
+        check_span = document.getElementById(id+"-span");
+        check_span.innerHTML =`<i class="fa-solid fa-check"></i>`;
+        document.getElementById("color_name").value=name;
+        
+
+        document.getElementById("side-color").innerHTML=name;
+        document.getElementById("side-color-price").innerHTML=additional_price;;
+        
+        from_price = parseFloat(document.getElementById('from_price').value);
+        if(!from_price){
+            from_price=0;
+        } 
+        size_price = parseFloat(document.getElementById('side-size-price').innerHTML);
+        if(!size_price){
+            size_price=0;
+        } 
+        cushion_flling_price = parseFloat(document.getElementById('cushion-flling-price').innerHTML);
+        if(!cushion_flling_price){
+            cushion_flling_price=0;
+        } 
+
+        updated_price = from_price+size_price+cushion_flling_price+parseFloat(additional_price)
+        console.log("updated_proce: ",updated_price);
+        document.getElementById("product-total").innerHTML='';
+        document.getElementById("product-total").innerHTML=updated_price;
+
+
+        
+        document.getElementById("color_image").src = "/static/assets/img/color-images/"+image;
+        document.getElementById("color_image").style.display="block";
+
+        
+
+        // document.getElementById("side-color-price").innerHTML=``;
+
+        image.style.border = "2px solid #e7ab3c";
+
+        
+    }
+    function select_finishing(id,name,additional_price,image){
+        console.log(id, name, additional_price, image);
+        prev_div = document.getElementsByClassName("cushion-div");
+        for(i=0;i<prev_div.length;i++){
+            prev_div[i].style.border = "none";
+            console.log(prev_div[i])
+
+        }
+
+        prev = document.getElementsByClassName("span-check2");
+        for(i=0;i<prev.length;i++){
+            prev[i].innerHTML=``;
+        }
+        check_span = document.getElementById(id+"-span-check");
+        check_span.innerHTML =`<i class="fa-solid fa-check"></i>`;
+
+
+        document.getElementById("cushion-flling").innerHTML=name;
+        document.getElementById("cushion-flling-price").innerHTML=additional_price;
+        document.getElementById("finishing_item_value").value=name;
+
+        document.getElementById("foam&fibre-"+id).style.border = "2px solid #e7ab3c";
+
+        document.getElementById("finishing_image").src = "/static/assets/img/finishing-item-images/"+image;
+        document.getElementById("finishing_image").style.display="block";
+
+        from_price = parseFloat(document.getElementById('from_price').value);
+        if(!from_price){
+            from_price=0;
+        } 
+        size_price = parseFloat(document.getElementById('side-size-price').innerHTML);
+        if(!size_price){
+            size_price=0;
+        } 
+        color_price = parseFloat(document.getElementById('side-color-price').innerHTML);
+        if(!color_price){
+            color_price=0;
+        } 
+        updated_price = from_price+size_price+color_price+parseFloat(additional_price)        
+        document.getElementById("product-total").innerHTML='';
+        document.getElementById("product-total").innerHTML=updated_price;
+
+        
+    }
+    function border_select(element){
+        border_div = document.getElementsByClassName("border_div");
+        for(i=0;i<border_div.length;i++){
+            border_div[i].style.border = "none";
+
+        }
+
+        console.log(element);
+        console.log(element.id);
+        var child = element.childNodes[3];
+        name = child.innerHTML;
+        console.log("child: ",child)
+
+        var image = element.childNodes[1]
+        
+        
+        var parent = element.parentNode[2];
+        console.log("parent: ",parent)
+        prev = document.getElementsByClassName("span-check3");
+        for(i=0;i<prev.length;i++){
+            prev[i].innerHTML=``;
+        }
+        check_span = document.getElementById(element.id+"-span");
+        check_span.innerHTML =`<i class="fa-solid fa-check"></i>`;
+
+        // document.getElementById("cushion-flling").innerHTML=name;
+
+        document.getElementById("border").value=element.id;
+
+        element.style.border = "2px solid #e7ab3c";
+
+        
+    }
+    function wood_select(element){
+        wood_div = document.getElementsByClassName("wood_div");
+        for(i=0;i<wood_div.length;i++){
+            wood_div[i].style.border = "none";
+
+        }
+        var child = element.childNodes[3];
+        name = child.innerHTML;
+
+        var image = element.childNodes[1]
+        
+        
+        var parent = element.parentNode[2];
+        console.log("parent: ",parent)
+        prev = document.getElementsByClassName("span-check4");
+        for(i=0;i<prev.length;i++){
+            prev[i].innerHTML=``;
+        }
+        check_span = document.getElementById(element.id+"-span");
+        check_span.innerHTML =`<i class="fa-solid fa-check"></i>`;
+
+        // document.getElementById("cushion-flling").innerHTML=name;
+        document.getElementById("wood").value=element.id;
+
+        element.style.border = "2px solid #e7ab3c";
+
+        
+    }
+    function stud_select(element){
+        stud_div = document.getElementsByClassName("stud_div");
+        for(i=0;i<stud_div.length;i++){
+            stud_div[i].style.border = "none";
+
+        }
+        var child = element.childNodes[3];
+        name = child.innerHTML;
+
+        var image = element.childNodes[1]
+        
+        
+        var parent = element.parentNode[2];
+        console.log("parent: ",parent)
+        prev = document.getElementsByClassName("span-check5");
+        for(i=0;i<prev.length;i++){
+            prev[i].innerHTML=``;
+        }
+        check_span = document.getElementById(element.id+"-span");
+        check_span.innerHTML =`<i class="fa-solid fa-check"></i>`;
+
+        // document.getElementById("cushion-flling").innerHTML=name;
+        
+        document.getElementById("stud").value=element.id;
+
+        element.style.border = "2px solid #e7ab3c";
+
+        
+    }
+</script>
+<script>
+    function scrollToElement(elementId) {
+        var scrollDiv = document.getElementById(elementId).offsetTop;
+        window.scrollTo({ top: scrollDiv, behavior: 'smooth'});
+    }
+</script>
+<script>
+    function login(){
+        
+        Swal.fire(
+                'Oops!',
+                'Please Login First!',
+                'error'
+            )
+        window.location.replace("/login");
+
+    }
+    function add_to_cart(){
+        total_price = document.getElementById("product-total").innerHTML;
+        qty = document.getElementById("qty").value;
+        product_id = document.getElementById("product_id").value;
+        color_name = document.getElementById("color_name").value;
+        size_name = document.getElementById("size_name").value;       
+        if (!size_name){
+            Swal.fire(
+                'Oops!',
+                'You did not select the size!',
+                'error'
+            )
+            return "You did not select the size!"
+        } 
+        
+        if (!color_name){
+            Swal.fire(
+                'Oops!',
+                'You did not select the Color!',
+                'error'
+            )
+            return "You did not select the Color!"
+        } 
+        finishing_item_value = document.getElementById("finishing_item_value").value;
+        if (!finishing_item_value){
+            Swal.fire(
+                'Oops!',
+                'You did not select the finising touch!',
+                'error'
+            )
+            return "You did not select the finising touch!"
+        } 
+        console.log(qty);
+        console.log(product_id);
+        console.log(color_name);
+        console.log(size_name);
+        console.log(finishing_item_value);
+        console.log("All good")
+        data = {"qty":qty,"product_id":product_id,"color_name":color_name,"size_name":size_name,"finishing_item":finishing_item_value,"total_price":total_price}
+        $.ajax({
+            type: "POST",
+            url: "/add-to-cart-route",
+            data: JSON.stringify(data),
+            contentType: "application/json",
+            // dataType: 'json',
+            success: function(result) {
+                if (result=="duplicate"){
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Item already in cart',
+                        })
+                }else if (result=="True"){
+                console.log("Result:");
+                console.log(result);
+                location.reload();
+                Swal.fire(
+                    'Added to Cart!',
+                    '',
+                    'success'
+                )
+                
+                }
+                else{
+                    console.log("result:")
+                    console.log(result);
+                }
+            } ,
+            error:function(request,error){
+                console.log("Error:");
+                console.log(error);
+
+            }
+        });
+
+    }
+    function add_to_cart_prev(){
+        product_id = document.getElementById("product_id").value;
+        color_id = document.querySelector('input[name="sel_color"]:checked').value;
+        size_id = document.querySelector('input[name="sel_size"]:checked').value;
+        qty = document.getElementById("qty").value;
+        data = {"product_id":product_id,"color_id":color_id,"size_id":size_id,"qty":qty}
+        $.ajax({
+            type: "POST",
+            url: "/add-to-cart-route",
+            data: JSON.stringify(data),
+            contentType: "application/json",
+            // dataType: 'json',
+            success: function(result) {
+                if (result=="duplicate"){
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Item already in cart',
+                        })
+                }else if (result=="True"){
+                console.log("Result:");
+                console.log(result);
+                location.reload();
+                }
+            } ,
+            error:function(request,error){
+                console.log("Error:");
+                console.log(error);
+
+            }
+        });
+    }
+</script>
+{% endblock %}

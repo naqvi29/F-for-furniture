@@ -1,0 +1,122 @@
+{% extends 'admin-layout.html' %}
+{% block title %} Add Finishing Item | Admin Dashboard {% endblock %}
+{% block heading %} Add Finishing Item {% endblock %}
+{% block page %} Add Finishing Item {% endblock %}
+
+{% block head %} 
+<style>
+  .preview {
+  width: 100%;
+  height: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+#preview {
+  max-width: 100%;
+  max-height: 300px;
+  display: block;
+}
+
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card card-dark">
+            <div class="card-header">
+              <h3 class="card-title">Fill all required fields to add a Finishing Item</h3>
+            </div>
+            <!-- /.card-header -->
+            <!-- form start -->
+            <form action="/admin-add/finishing-items" enctype=multipart/form-data method="post"> 
+              <div class="card-body">
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Name</label>
+                  <input type="text" name="name" class="form-control" id="exampleInputEmail1" required>
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Additional Price &pound;</label>
+                  <input type="text" name="additional_price" class="form-control" id="exampleInputEmail1">
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Select Finishing Category</label>
+                  <select name="finishing_category" class="form-control" required>
+                    {% for i in finishing_categories %}
+                    <option value="{{i.id}}">{{i.name}}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+
+                <div class="container">
+                  <div class="row">
+                    <div class="col-md-6 mx-auto mt-5">
+                      <div class="custom-file">
+                        <input type="file" name="image" class="custom-file-input" id="customFile" required>
+                        <label class="custom-file-label" for="customFile">Upload Image</label>
+                      </div>
+                      <div style="display: none;" id="preview_div" class="preview mt-3">
+                        <img style="width: 20rem;" id="preview" src="#" alt="Preview" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <!-- <div class="form-group">
+                  <label for="exampleInputPassword1">Password</label>
+                  <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputFile">File input</label>
+                  <div class="input-group">
+                    <div class="custom-file">
+                      <input type="file" class="custom-file-input" id="exampleInputFile">
+                      <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                    </div>
+                    <div class="input-group-append">
+                      <span class="input-group-text">Upload</span>
+                    </div>
+                  </div>
+                </div> -->
+              </div>
+              <!-- /.card-body -->
+
+              <div class="card-footer">
+                <button type="submit" class="btn btn-success">Add</button>
+              </div>
+            </form>
+          </div>
+
+        </div>
+      </div>
+      <!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </section>
+{% endblock %}
+{% block scripts %} 
+<script>
+  const input = document.querySelector('input[type="file"]');
+  const preview = document.querySelector('#preview');
+
+  input.addEventListener("change", function () {
+    const file = this.files[0];
+    if (file) {
+      const reader = new FileReader();
+
+      reader.addEventListener("load", function () {
+        preview.src = reader.result;
+        document.getElementById("preview_div").style.display='block';
+      });
+
+      reader.readAsDataURL(file);
+    } else {
+      preview.src = "";
+    }
+  });
+
+</script>
+  {% endblock %}

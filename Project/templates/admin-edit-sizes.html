@@ -1,0 +1,87 @@
+{% extends 'admin-layout.html' %}
+{% block title %} Edit Size | Admin Dashboard {% endblock %}
+{% block heading %} Edit Size {% endblock %}
+{% block page %} Edit Size {% endblock %}
+
+{% block head %} 
+{% endblock %}
+
+{% block content %}
+<section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card card-dark">
+            <div class="card-header">
+              <h3 class="card-title">Fill all required fields to Edit a Size</h3>
+            </div>
+            <!-- /.card-header -->
+            <!-- form start -->
+            <form action="/admin-edit/sizes/{{data.id}}" method="post"> 
+              <div class="card-body">
+                <div class="form-group">
+                  <label for="exampleInputEmail1">name</label>
+                  <input type="text" name="name" class="form-control" id="exampleInputEmail1" value="{{data.name}}" required>
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Additional Price</label>
+                  <input type="number" step="any" name="additional_price" class="form-control" value="{{data.additional_cost}}" id="exampleInputEmail1">
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Height (H)</label>
+                  <input type="number" name="height" class="form-control" id="exampleInputEmail1" value="{{data.height}}"  required>
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Width (W)</label>
+                  <input type="number" name="width" class="form-control" id="exampleInputEmail1" value="{{data.width}}" required>
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Depth (D)</label>
+                  <input type="number" name="depth" class="form-control" id="exampleInputEmail1" value="{{data.depth}}" required>
+                </div>
+                <div class="container">
+                  <div class="row">
+                    <div class="col-md-6 mx-auto mt-5">
+                      <div class="custom-file">
+                        <input type="file" name="image" class="custom-file-input" id="customFile">
+                        <label class="custom-file-label" for="customFile">Upload Image</label>
+                      </div>
+                      <div style="display: none;" id="preview_div" class="preview mt-3">
+                        <img style="width: 20rem;" id="preview" src="#" alt="Preview" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- <div class="form-group">
+                  <label for="exampleInputPassword1">Password</label>
+                  <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputFile">File input</label>
+                  <div class="input-group">
+                    <div class="custom-file">
+                      <input type="file" class="custom-file-input" id="exampleInputFile">
+                      <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                    </div>
+                    <div class="input-group-append">
+                      <span class="input-group-text">Upload</span>
+                    </div>
+                  </div>
+                </div> -->
+              </div>
+              <!-- /.card-body -->
+
+              <div class="card-footer">
+                <button type="submit" class="btn btn-success">Update</button>
+              </div>
+            </form>
+          </div>
+
+        </div>
+      </div>
+      <!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </section>
+{% endblock %}
+{% block scripts %} 
+  {% endblock %}

@@ -1,0 +1,110 @@
+{% extends 'admin-layout.html' %}
+{% block title %} Edit Finishing Items | Admin Dashboard {% endblock %}
+{% block heading %} Edit Finishing Items {% endblock %}
+{% block page %} Edit Finishing Items {% endblock %}
+
+{% block head %} 
+<style>
+  .preview {
+  width: 100%;
+  height: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+#preview {
+  max-width: 100%;
+  max-height: 300px;
+  display: block;
+}
+
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card card-dark">
+            <div class="card-header">
+              <h3 class="card-title">Fill all required fields to Edit a Finishing Item</h3>
+            </div>
+            <!-- /.card-header -->
+            <!-- form start -->
+            <form action="/admin-edit/finishing-items/{{data.id}}" method="post"> 
+              <div class="card-body">
+                <div class="form-group">
+                  <label for="exampleInputEmail1">name</label>
+                  <input type="text" name="name" class="form-control" id="exampleInputEmail1" required value="{{data.name}}">
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Additional Price</label>
+                  <input type="number" step="any" name="additional_price" class="form-control" id="exampleInputEmail1" value="{{data.additional_price}}">
+                </div>
+                
+              <div class="form-group">
+                <label for="exampleInputEmail1">Select Finishing Category</label>
+                <select required name="finishing_category" class="form-control">
+                  {% for i in finishing_categories %}
+                  {% if i.id == data.finishing_category_id %}
+                  <option selected value="{{i.id}}">{{i.name}}</option>
+                  {% else %}
+                  <option value="{{i.id}}">{{i.name}}</option>
+                  {% endif %}
+                  {% endfor %}
+                </select>
+              </div>
+              <div class="container">
+                <div class="row">
+                  <div class="col-md-6 mx-auto mt-5">
+                    <div class="custom-file">
+                      <input type="file" name="image" class="custom-file-input" id="customFile">
+                      <label class="custom-file-label" for="customFile">Upload Image</label>
+                    </div>
+                    <div style="display: none;" id="preview_div" class="preview mt-3">
+                      <img style="width: 20rem;" id="preview" src="#" alt="Preview" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              </div>
+              <!-- /.card-body -->
+
+              <div class="card-footer">
+                <button type="submit" class="btn btn-success">Update</button>
+              </div>
+            </form>
+          </div>
+
+        </div>
+      </div>
+      <!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </section>
+{% endblock %}
+{% block scripts %} 
+
+<script>
+  const input = document.querySelector('input[type="file"]');
+  const preview = document.querySelector('#preview');
+
+  input.addEventListener("change", function () {
+    const file = this.files[0];
+    if (file) {
+      const reader = new FileReader();
+
+      reader.addEventListener("load", function () {
+        preview.src = reader.result;
+        document.getElementById("preview_div").style.display='block';
+      });
+
+      reader.readAsDataURL(file);
+    } else {
+      preview.src = "";
+    }
+  });
+
+</script>
+  {% endblock %}

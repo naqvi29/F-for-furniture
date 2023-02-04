@@ -1,0 +1,482 @@
+{% extends 'layout.html' %} 
+{% block title %}Shop | Restopedic {% endblock %}
+{% block content %}
+<style>
+    .dot {
+  height: 20px;
+  width: 20px;
+  background-color: #bbb;
+  border-radius: 50%;
+  /* display: inline-block; */
+  display: inline-flex;
+  /* position: absolute; */
+  /* margin-left: 1rem; */
+  /* display: flex; */
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.filter-btn{
+    font-size: 14px;
+    color: #ffffff;
+    font-weight: 700;
+    background: #e7ab3c;
+    padding: 7px 20px 5px;
+    border-radius: 2px;
+    display: inline-block;
+    text-transform: uppercase;
+    border: white;
+
+}
+</style>
+    <div class="container-fluid my-3">
+        <h2 class="section-title">shop</h2>
+    </div>
+    <section class="product-shop spad">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 col-sm-8 order-2 order-lg-1 produts-sidebar-filter">
+                    <div class="filter-widget">
+                        <h4 class="fw-title">Categories</h4>
+                        <ul class="filter-catagories">
+                            {% for i in categories %}
+                                {% if selected %}
+                                    {% if selected.id==i.id %}
+                                    <li><a href="/category/{{i.id}}"><strong style="font-weight: 900;">{{i.name}}</strong></a></li>
+                                    {% else %}
+                                    <li><a href="/category/{{i.id}}">{{i.name}}</a></li>                        
+                                    {% endif %}
+                                {% else %}                                
+                                <li><a href="/category/{{i.id}}">{{i.name}}</a></li>     
+                                {% endif %}
+                            {% endfor %}
+                            <!-- <li><a href="#">Category Name</a></li>
+                            <li><a href="#">Category Name</a></li>
+                            <li><a href="#">Category Name</a></li> -->
+                        </ul>
+                    </div>
+                    <form action="/apply-filter" method="post">
+                        <div class="filter-widget">
+                            <h4 class="fw-title">Brand</h4>
+                            <div class="fw-brand-check">
+                                {% for i in brands %}
+                                <div class="bc-item">
+                                    <label for="brand-{{i.id}}">
+                                        {{i.name}}
+                                        <input class="brand-checkbox" name="brand-checkbox" value="{{i.id}}" type="checkbox" id="brand-{{i.id}}">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                                {% endfor %}
+                                <!-- <button onclick="return apply_brand()" class="apply-btn">apply</button> -->
+                            </div>
+                        </div>
+                        <div class="filter-widget">
+                            <h4 class="fw-title">Price</h4>
+                            <div class="filter-range-wrap">
+                                <div class="range-slider">
+                                    <div class="price-input">
+                                        <label for="minamount">$</label>
+                                        <input name="minamount" type="text" id="minamount">
+                                        
+                                        <label for="maxamount">$</label>
+                                        <input name="maxamount" type="text" id="maxamount">
+                                    </div>
+                                </div>
+                                <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
+                                    data-min="10" data-max="10000">
+                                    <div class="ui-slider-range ui-corner-all ui-widget-header"></div>
+                                    <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
+                                    <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
+                                </div>
+                            </div>
+                            <!-- <button onclick="return apply_price()" href="#" class="filter-btn">Apply</button> -->
+                        </div>
+                        <!-- <div class="filter-widget">
+                            <h4 class="fw-title">Color</h4>
+                            <div class="fw-color-choose">
+                                {% for i in colors %}
+                                <div class="">
+                                    <input name="color-checkbox" type="checkbox" id="cs-black" value="{{i.id}}">
+                                    <label class="cs-black" for="cs-black">{{i.name}}    <span style="background-color: {{i.code}};" class="dot"></span></label>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div> -->
+                        <!-- <div class="filter-widget">
+                            <h4 class="fw-title">Size</h4>
+                            <div class="fw-size-choose">
+                                {% for i in sizes %}
+                                <div class="">
+                                    {% if loop.index ==1 %}                                    
+                                    <input checked id="size-radio-{{i.id}}" type="radio" name="size-radio" value="{{i.id}}">
+                                    {% else %}
+                                    <input id="size-radio-{{i.id}}" type="radio" name="size-radio" value="{{i.id}}">
+                                    
+                                    {% endif %}
+                                    <label for="s-size">{{i.name}}</label>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div> -->
+                        <button type="submit"  class="filter-btn">Apply</button>
+                    </form>
+                    <!-- <div class="filter-widget">
+                        <h4 class="fw-title">Tags</h4>
+                        <div class="fw-tags">
+                            <a href="#">TagName</a>
+                            <a href="#">TagName</a>
+                            <a href="#">TagName</a>
+                            <a href="#">TagName</a>
+                            <a href="#">TagName</a>
+                            <a href="#">TagName</a>
+                            <a href="#">TagName</a>
+                        </div>
+                    </div> -->
+                </div>
+                
+                <div class="col-lg-9 order-1 order-lg-2">
+                    <div class="product-show-option">
+                        <div class="row">
+                            <div class="col-lg-7 col-md-7">
+                                <div class="select-option">
+                                    <select onchange="return sort_changed()" id="sorting" name="sorting" class="sorting">
+                                        {% if sort=="low_to_high" %}
+                                        <option value="default">Default Sorting</option>
+                                        <option selected value="low_to_high">Price: low to high</option>
+                                        <option value="high_to_low">Price: high to low</option>
+                                        <option value="a_to_z">Alphabetically: A to Z</option>
+                                        <option value="z_to_a">Alphabetically: Z to A</option>
+                                        {% elif sort == "high_to_low" %}
+                                        <option value="default">Default Sorting</option>
+                                        <option value="low_to_high">Price: low to high</option>
+                                        <option selected value="high_to_low">Price: high to low</option>
+                                        <option value="a_to_z">Alphabetically: A to Z</option>
+                                        <option value="z_to_a">Alphabetically: Z to A</option>
+                                        {% elif sort == "a_to_z" %}
+                                        <option value="default">Default Sorting</option>
+                                        <option value="low_to_high">Price: low to high</option>
+                                        <option value="high_to_low">Price: high to low</option>
+                                        <option selected value="a_to_z">Alphabetically: A to Z</option>
+                                        <option value="z_to_a">Alphabetically: Z to A</option>
+                                        {% elif sort == "z_to_a" %}
+                                        <option value="default">Default Sorting</option>
+                                        <option value="low_to_high">Price: low to high</option>
+                                        <option value="high_to_low">Price: high to low</option>
+                                        <option value="a_to_z">Alphabetically: A to Z</option>
+                                        <option selected value="z_to_a">Alphabetically: Z to A</option>
+                                        {% else %}
+                                        <option selected value="default">Default Sorting</option>
+                                        <option value="low_to_high">Price: low to high</option>
+                                        <option value="high_to_low">Price: high to low</option>
+                                        <option value="a_to_z">Alphabetically: A to Z</option>
+                                        <option value="z_to_a">Alphabetically: Z to A</option>
+                                        {% endif %}
+                                    </select>
+                                    <!-- <select class="p-show">
+                                        <option value="">Show:</option>
+                                        <option value="">Show: 09</option>
+                                        <option value="">Show: 18</option>
+                                        <option value="">Show: 27</option>
+                                        <option value="">Show: 36</option>
+                                        <option value="">Show: All</option>
+                                    </select> -->
+                                </div>
+                            </div>
+                            <div class="col-lg-5 col-md-5 text-right">
+                                <p>Showing {{total_products}} Products</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-list">
+                        <div class="row">
+                            {% if products %}
+                            {% for i in products %}
+                            <div class="col-lg-4 col-sm-6" onclick="open_product({{i.id}})">
+                                <div class="product-item">
+                                    <div class="pi-pic">
+                                        <img src="/static/assets/img/products/{{i.image}}" alt="">
+                                        <div class="sale pp-sale">Sale</div>
+                                        <div class="icon">
+                                            <i class="icon_heart_alt"></i>
+                                        </div>
+                                        <ul>
+                                            <!-- <li class="w-icon active"><a href="#" onclick="return add_to_cart('{{i.id}}')"><i class="fa-solid fa-cart-shopping"></i></a></li> -->
+                                            <li class="w-icon active"><a href="/product-details/{{i.id}}" onclick="return add_to_cart('{{i.id}}')"><i class="fa-solid fa-eye"></i></a></li>
+                                            <!-- {% if loggedin %}
+                                            <li class="w-icon active"><a href="#" onclick="return add_to_cart('{{i.id}}')"><i class="fa-solid fa-cart-shopping"></i></a></li>
+                                            {% else %}
+                                            <li class="w-icon active"><a href="/login"><i class="fa-solid fa-cart-shopping"></i></a></li>
+                                            {% endif %} -->
+                                            <li class="quick-view"><a href="/product-details/{{i.id}}">+ Quick View</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="pi-text">
+                                        <div class="catagory-name">{{i.category}}</div>
+                                        <a href="/product-details/{{i.id}}">
+                                            <h5>{{i.name}}</h5>
+                                        </a>
+                                        <div class="product-price">
+                                            &pound;{{ "{:,.0f}".format(i.price) }}
+                                            <!-- <span>$35.00</span> -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                            
+                            {% else %} 
+                            
+                                <div class="loading-more">
+                                    <i class="icon_loading"></i>
+                                    <a href="#">
+                                        No Products Found
+                                    </a>
+                                </div>
+                            {% endif %}
+                            <!-- <div class="col-lg-4 col-sm-6">
+                                <div class="product-item">
+                                    <div class="pi-pic">
+                                        <img src="/static/assets/img/products/Untitled-design-91.png" alt="">
+                                        <div class="sale pp-sale">Sale</div>
+                                        <div class="icon">
+                                            <i class="icon_heart_alt"></i>
+                                        </div>
+                                        <ul>
+                                            <li class="w-icon active"><a href="#"><i class="fa-solid fa-cart-shopping"></i></a></li>
+                                            <li class="quick-view"><a href="/product-details">+ Quick View</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="pi-text">
+                                        <div class="catagory-name">Category</div>
+                                        <a href="/product-details">
+                                            <h5>Product Namexs</h5>
+                                        </a>
+                                        <div class="product-price">
+                                            $14.00
+                                            <span>$35.00</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-sm-6">
+                                <div class="product-item">
+                                    <div class="pi-pic">
+                                        <img src="/static/assets/img/products/Untitled-design-93.png" alt="">
+                                        <div class="icon">
+                                            <i class="icon_heart_alt"></i>
+                                        </div>
+                                        <ul>
+                                            <li class="w-icon active"><a href="#"><i class="fa-solid fa-cart-shopping"></i></a></li>
+                                            <li class="quick-view"><a href="#">+ Quick View</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="pi-text">
+                                        <div class="catagory-name">Category</div>
+                                        <a href="#">
+                                            <h5>Product Name</h5>
+                                        </a>
+                                        <div class="product-price">
+                                            $13.00
+                                            <span>$35.00</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-sm-6">
+                                <div class="product-item">
+                                    <div class="pi-pic">
+                                        <img src="/static/assets/img/products/Untitled-design-96.png" alt="">
+                                        <div class="icon">
+                                            <i class="icon_heart_alt"></i>
+                                        </div>
+                                        <ul>
+                                            <li class="w-icon active"><a href="#"><i class="fa-solid fa-cart-shopping"></i></a></li>
+                                            <li class="quick-view"><a href="#">+ Quick View</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="pi-text">
+                                        <div class="catagory-name">Category</div>
+                                        <a href="#">
+                                            <h5>Product Name</h5>
+                                        </a>
+                                        <div class="product-price">
+                                            $34.00
+                                            <span>$35.00</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-sm-6">
+                                <div class="product-item">
+                                    <div class="pi-pic">
+                                        <img src="/static/assets/img/products/Untitled-design-98-300x212.png" alt="">
+                                        <div class="icon">
+                                            <i class="icon_heart_alt"></i>
+                                        </div>
+                                        <ul>
+                                            <li class="w-icon active"><a href="#"><i class="fa-solid fa-cart-shopping"></i></a></li>
+                                            <li class="quick-view"><a href="#">+ Quick View</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="pi-text">
+                                        <div class="catagory-name">Category</div>
+                                        <a href="#">
+                                            <h5>Product Name</h5>
+                                        </a>
+                                        <div class="product-price">
+                                            $64.00
+                                            <span>$35.00</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-sm-6">
+                                <div class="product-item">
+                                    <div class="pi-pic">
+                                        <img src="/static/assets/img/products/Untitled-design-99-300x212.png" alt="">
+                                        <div class="icon">
+                                            <i class="icon_heart_alt"></i>
+                                        </div>
+                                        <ul>
+                                            <li class="w-icon active"><a href="#"><i class="fa-solid fa-cart-shopping"></i></a></li>
+                                            <li class="quick-view"><a href="#">+ Quick View</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="pi-text">
+                                        <div class="catagory-name">Category</div>
+                                        <a href="#">
+                                            <h5>Product Name</h5>
+                                        </a>
+                                        <div class="product-price">
+                                            $44.00
+                                            <span>$35.00</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-sm-6">
+                                <div class="product-item">
+                                    <div class="pi-pic">
+                                        <img src="/static/assets/img/products/Untitled-design-100-300x212.png" alt="">
+                                        <div class="icon">
+                                            <i class="icon_heart_alt"></i>
+                                        </div>
+                                        <ul>
+                                            <li class="w-icon active"><a href="#"><i class="fa-solid fa-cart-shopping"></i></a></li>
+                                            <li class="quick-view"><a href="#">+ Quick View</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="pi-text">
+                                        <div class="catagory-name">Category</div>
+                                        <a href="#">
+                                            <h5>Product Name</h5>
+                                        </a>
+                                        <div class="product-price">
+                                            $34.00
+                                            <span>$35.00</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-sm-6">
+                                <div class="product-item">
+                                    <div class="pi-pic">
+                                        <img src="/static/assets/img/products/Untitled-design-85.png" alt="">
+                                        <div class="sale pp-sale">Sale</div>
+                                        <div class="icon">
+                                            <i class="icon_heart_alt"></i>
+                                        </div>
+                                        <ul>
+                                            <li class="w-icon active"><a href="#"><i class="fa-solid fa-cart-shopping"></i></a></li>
+                                            <li class="quick-view"><a href="#">+ Quick View</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="pi-text">
+                                        <div class="catagory-name">Category</div>
+                                        <a href="#">
+                                            <h5>Product Name</h5>
+                                        </a>
+                                        <div class="product-price">
+                                            $64.00
+                                            <span>$35.00</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-sm-6">
+                                <div class="product-item">
+                                    <div class="pi-pic">
+                                        <img src="/static/assets/img/products/Untitled-design-90.png" alt="">
+                                        <div class="icon">
+                                            <i class="icon_heart_alt"></i>
+                                        </div>
+                                        <ul>
+                                            <li class="w-icon active"><a href="#"><i class="fa-solid fa-cart-shopping"></i></a></li>
+                                            <li class="quick-view"><a href="#">+ Quick View</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="pi-text">
+                                        <div class="catagory-name">Category</div>
+                                        <a href="#">
+                                            <h5>Product Name</h5>
+                                        </a>
+                                        <div class="product-price">
+                                            $44.00
+                                            <span>$35.00</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-sm-6">
+                                <div class="product-item">
+                                    <div class="pi-pic">
+                                        <img src="/static/assets/img/products/Untitled-design-89-1.png" alt="">
+                                        <div class="icon">
+                                            <i class="icon_heart_alt"></i>
+                                        </div>
+                                        <ul>
+                                            <li class="w-icon active"><a href="#"><i class="fa-solid fa-cart-shopping"></i></a></li>
+                                            <li class="quick-view"><a href="#">+ Quick View</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="pi-text">
+                                        <div class="catagory-name">Category</div>
+                                        <a href="#">
+                                            <h5>Product Name</h5>
+                                        </a>
+                                        <div class="product-price">
+                                            $34.00
+                                            <span>$35.00</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> -->
+                        </div>
+                    </div>
+                    <!-- <div class="loading-more">
+                        <i class="icon_loading"></i>
+                        <a href="#">
+                            Loading More
+                        </a>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </section>
+    {% endblock %}
+    {% block scripts %}
+    <script>
+        function sort_changed(){
+            var e = document.getElementById("sorting");
+            var value = e.value;
+            console.log(value);
+            window.location.href = '/sort-changed/'+value;
+        }
+        function open_product(id){
+            console.log(id);
+            window.location.replace("/product-details/"+id);
+        }
+    </script>
+    {% endblock %}
+    

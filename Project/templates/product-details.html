@@ -1,0 +1,246 @@
+{% extends 'layout.html' %} 
+{% block title %}Product Name | Restopedic{% endblock %}
+{% block content %}
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<style>
+    .dot {
+  height: 20px;
+  width: 20px;
+  background-color: #bbb;
+  border-radius: 50%;
+  /* display: inline-block; */
+  display: inline-flex;
+  position: absolute;
+  /* margin-left: 1rem; */
+  /* display: flex; */
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-left: 1rem;
+}
+</style>
+    <section class="product_view">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-6">
+                    <!-- <img src="/static/assets/img/product-detail-carousel/Untitled-design-89-1.png" alt=""> -->
+                    <img src="/static/assets/img/products/{{product.image}}" alt="">
+                </div>
+                <div class="col-lg-6">
+                    <h2>{{product.name}}</h2>
+                    <p>{{product.description}}</p>
+                    <h5>Price:</h5>
+                    <h4>&euro; {{ "{:,.0f}".format(product.price) }}</h4>
+                    <!-- <h5>Or From &euro; 26.42 / Month</h5> -->
+                    
+                    
+                    <div class="m-2 ">
+                        <h5 style="margin-bottom: 0.5rem;">Select Color</h5>
+                        <input style="display: none;" type="text" id="product_id" value="{{product.id}}">
+                        {% for i in colors %}
+                            <input style="height: 18px;
+                            width: 18px;" type="radio" id="html" name="sel_color" value="{{i.id}}">
+                            <label for="html">{{i.name}}<span style="background-color: {{i.code}};" class="dot"></span></label><br>
+                        {% endfor %}
+                    </div>
+                    <div class="m-2 ">
+                        <h5 style="margin-bottom: 0.5rem;">Select Size</h5>
+                        {% for i in sizes %}
+                            <input style="height: 18px;
+                            width: 18px;" id="size-radio-{{i.id}}" type="radio" name="sel_size" value="{{i.id}}">                              
+                            <label for="s-size">{{i['name']}}</label>
+                        {% endfor %}
+                    </div>
+                    <div class="m-2 ">
+                        <h5 style="margin-bottom: 0.6rem;">Qty</h5>
+                        <input type="number" style="width:30%!important" class="form-control"  name="qty" id="qty">
+                    </div>
+
+
+                    <hr class="mb-4">
+                    {% if loggedin %}
+                    <!-- <a  type="button" class="mt-4 buy-btn">buy now</a> -->
+                    <a onclick="return add_to_cart()" type="button" class="mt-4 cart-btn">add to cart</a>
+                    {% else %}
+                    <!-- <a href="/login" class="mt-4 buy-btn">buy now</a> -->
+                    <a type="/login" class="mt-4 buy-btn">add to cart</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="banner-2">
+        <div class="container">
+            <div class="benefit-items">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="single-benefit">
+                            <div class="sb-icon">
+                                <img src="/static/assets/img/card-img.png" alt="" />
+                            </div>
+                            <div class="sb-text">
+                                <h6>Free Delivery</h6>
+                                <!-- <p>12 months deferment*</p> -->
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="col-lg-3">
+                        <div class="single-benefit">
+                            <div class="sb-icon">
+                                <img src="/static/assets/img/wallet-img.png" alt="" />
+                            </div>
+                            <div class="sb-text">
+                                <h6>lifetime guarantee</h6>
+                                <p>on every product</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="single-benefit">
+                            <div class="sb-icon">
+                                <img src="/static/assets/img/check-img.png" alt="" />
+                            </div>
+                            <div class="sb-text">
+                                <h6>30 day money back</h6>
+                                <p>guarantee</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="single-benefit">
+                            <div class="sb-icon">
+                                <img src="/static/assets/img/swatch-img.png" alt="" />
+                            </div>
+                            <div class="sb-text">
+                                <h6>order free</h6>
+                                <p>swatches &amp; brochure</p>
+                            </div>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="product_services">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 text-center">
+                    <img src="/static/assets/img/product-detail-carousel/dc_icon_van.svg" width="135" height="135" alt="">
+                    <h3>assembly</h3>
+                    <p>We can deliver it straight to you,
+                        and takeaway all the packaging.</p>
+                </div>
+                <div class="col-lg-4 text-center">
+                    <img src="/static/assets/img/product-detail-carousel/dc_icon_calendar.svg" width="135" height="135" alt="">
+                    <h3>lifetime guarantee</h3>
+                    <p>We're that confident - we give you a lifetime guarantee on our sofas*</p>
+                </div>
+                <div class="col-lg-4 text-center">
+                    <img src="/static/assets/img/product-detail-carousel/dc_icon_badge.svg" width="135" height="135" alt="">
+                    <h3>12 month cover warantee</h3>
+                    <p>Rest assured that your new sofa covering is protected against any defects for 12 months.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="trusted">
+        <div class="container justify-content-center">
+            <h2 class="text-center">trusted by our customers</h2>
+            <div class="text-center">
+                <i class="fa-solid fa-star"></i><span>Trustpilot</span>
+            </div>
+            <div class="text-center">
+                <i class="fa-solid fa-star five"></i>
+                <i class="fa-solid fa-star five"></i>
+                <i class="fa-solid fa-star five"></i>
+                <i class="fa-solid fa-star five"></i>
+                <i class="fa-solid fa-star-half-stroke five"></i>
+            </div>
+            <div class="text-center">
+                <span class="text_left">TrustScore <b>4.5</b></span>
+                <span class="text_right"><b>613</b> reviews</span>
+            </div>
+        </div>
+    </section>
+    <section class="card_section">
+        <div class="container-fluid">
+            <h2 class="text-center">why you'll love<br> Restopedics Products</h2>
+            <div class="row">
+                <div class="col-lg-4">
+                    <img src="/static/assets/img/Polaroid_1.png" alt="">
+                    <h3 class="text-center">handmade in yorkshire</h3>
+                    <p class="text-center">
+                        All of our sofas are handcrafted by our expert team based in Yorkshire. At Restopedic limited
+                        we
+                        pride ourselves on the personal touch. From manufacture to delivery - it's personal with us.
+                    </p>
+                </div>
+                <div class="col-lg-4">
+                    <img src="/static/assets/img/Polaroid_2.png" alt="">
+                    <h3 class="text-center">lifetime guarantee</h3>
+                    <p class="text-center">Here at Restopedic limited, because we are so confident in the quality and
+                        build
+                        of our sofas, we give a lifetime guarantee on all our sofas*</p>
+                </div>
+                <div class="col-lg-4">
+                    <img src="/static/assets/img/Polaroid_3.png" alt="">
+                    <h3 class="text-center">designed by us</h3>
+                    <p class="text-center">Our love of craft and design inspires us every day. Our expert designers care
+                        about
+                        every detail, from the studs to the wood finish. It's about creating amazing restopedic sofas that
+                        stand
+                        the test of time, whilst retaining iconic style.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="british_design">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <img src="/static/assets/img/Map_v2.0-1.png" alt="">
+                </div>
+                <div class="col-lg-6">
+                    <h2>BRITISH DESIGN, AND HANDCRAFTED EXCELLENCE LOVED BY CUSTOMER ALL OVER THE WORLD</h2>
+                    <p>At Restopedic limited, we have stores all around the world. We're on a mission to give the
+                        world a
+                        taste of the distinct nature of our products.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script>
+        function add_to_cart(){
+            product_id = document.getElementById("product_id").value;
+            color_id = document.querySelector('input[name="sel_color"]:checked').value;
+            size_id = document.querySelector('input[name="sel_size"]:checked').value;
+            qty = document.getElementById("qty").value;
+            data = {"product_id":product_id,"color_id":color_id,"size_id":size_id,"qty":qty}
+            $.ajax({
+                type: "POST",
+                url: "/add-to-cart-route",
+                data: JSON.stringify(data),
+                contentType: "application/json",
+                // dataType: 'json',
+                success: function(result) {
+                    if (result=="duplicate"){
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Item already in cart',
+                            })
+                    }else if (result=="True"){
+                    console.log("Result:");
+                    console.log(result);
+                    location.reload();
+                    }
+                } ,
+                error:function(request,error){
+                    console.log("Error:");
+                    console.log(error);
+
+                }
+            });
+        }
+    </script>
+    {% endblock %}

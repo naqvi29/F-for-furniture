@@ -1,0 +1,93 @@
+{% extends 'layout.html' %} 
+{% block title %}Contact Us | Restopedic {% endblock %}
+{% block content %}
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <div class="map spad">
+        <div class="container">
+            <div class="map-inner">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3620.0941952450407!2d67.06381011447765!3d24.860632251374405!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3eb340889517ad77%3A0xf99f9c432353d20f!2sWebtrica%20%7C%20Web%20Design%20Karachi%20%7C%20Web%20Design%20Pakistan%20%7C%20Web%20Design%20Company%20Karachi%20%7C%20SEO%20%7C%20Mobile%20App%20Development!5e0!3m2!1sen!2s!4v1669715874210!5m2!1sen!2s"
+                    height="610" style="border:0" allowfullscreen="" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+    </div>
+
+
+    <section class="contact-section spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-5">
+                    <div class="contact-title">
+                        <h4>Contacts Us</h4>
+                        <p>For any questions or inquiries, please contact us. Our friendly team endeavour to always get
+                            back to you as soon as possible.</p>
+                    </div>
+                    <div class="contact-widget">
+                        <div class="cw-item">
+                            <div class="ci-icon">
+                                <i class="fa-solid fa-location-dot"></i>
+                            </div>
+                            <div class="ci-text">
+                                <span>Address:</span>
+                                <p>Unit 6, Pollard St South, Huddersfield, HD3 4GU</p>
+                            </div>
+                        </div>
+                        <div class="cw-item">
+                            <div class="ci-icon">
+                                <i class="fa-solid fa-mobile-screen-button"></i>
+                            </div>
+                            <div class="ci-text">
+                                <span>Phone:</span>
+                                <p>07306 326948</p>
+                            </div>
+                        </div>
+                        <div class="cw-item">
+                            <div class="ci-icon">
+                                <i class="fa-regular fa-envelope"></i>
+                            </div>
+                            <div class="ci-text">
+                                <span>Email:</span>
+                                <p><a href="mailto:sales@restopedic.co.uk" class="__cf_email__">sales@restopedic.co.uk</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 offset-lg-1">
+                    <div class="contact-form">
+                        <div class="leave-comment">
+                            <h4>Leave A Comment</h4>
+                            <p>Our staff will call back later and answer your questions.</p>
+                            <form action="/contact" method="post" class="comment-form">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <input name="name" type="text" placeholder="Your name">
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <input name="email" type="email" placeholder="Your email">
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <textarea name="message" placeholder="Your message"></textarea>
+                                        <button type="submit" class="site-btn">Send message</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    {% if send %} 
+    <script>
+        Swal.fire({
+            icon: 'success',
+            title: 'Success',
+            text: 'Message Sent',
+            })
+    </script>
+    {% endif %}
+    {% endblock %}

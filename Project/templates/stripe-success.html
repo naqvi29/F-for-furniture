@@ -1,0 +1,26 @@
+{% extends 'layout.html' %} 
+{% block title %}Order Placed | Distinctive Bedstore {% endblock %}
+{% block content %}
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <div class="register-login-section spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 offset-lg-3">
+                    <div class="login-form">
+                        <h3>Your Order Has been placed Successfully</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% if error %} 
+    <script>
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: '{{error}}',
+            })
+    </script>
+    {% endif %}
+    {% endblock %}
